@@ -712,7 +712,7 @@
     <a class="link-chip" href="https://square.link/u/VrNoKWtz" target="_blank" rel="noopener">KEEP THE LIGHTS ON</a>
     <button class="link-chip" id="getInvolvedBtn" type="button">GET INVOLVED</button>
     <span class="link-chip soon" aria-disabled="true">EVENTS <span class="soon-badge">(soon)</span></span>
-    <span class="link-chip soon" aria-disabled="true">ABOUT THE AUTHOR <span class="soon-badge">(soon)</span></span>
+    <button class="link-chip" id="aboutBtn" type="button">ABOUT THE AUTHOR</button>
   </div>
 
   <div class="frame">
@@ -851,6 +851,38 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="aboutModal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <button class="modal-close" id="aboutClose" type="button" aria-label="Close">&#10005;</button>
+    <div class="author-jump">
+      <div class="cap"></div>
+      <div class="hair"></div>
+      <div class="head"></div>
+      <div class="arm arm-l"></div>
+      <div class="arm arm-r"></div>
+      <div class="torso"></div>
+      <div class="leg leg-l"></div>
+      <div class="leg leg-r"></div>
+    </div>
+    <h3 id="aboutTitle">ABOUT THE AUTHOR</h3>
+    <p>
+      <span class="section-title">The Zine</span>
+      It started with a birdhouse on Woodland Street: ten hand-made copies, tucked away for whoever found them. That tiny experiment grew into a quarterly zine passed around some of Nashville's best bars, now distributed through mini bar stands built to showcase the bars they sit in.
+    </p>
+    <p>
+      At its heart, this zine is about the bartenders of East Nashville: the people behind the classic cocktails you'll actually want to make, and the stories that come after last call. Every issue features three bartenders, their spin on a drink, and the history behind it. Expect illustrated stories from behind the bar, hospitality humor, resources for working bartenders, and shoutouts to the side hustles that make this community what it is.
+    </p>
+    <p>
+      <span class="section-title">About Ahli</span>
+      Illustrator, writer, bad speller, miniature builder. Ahli Switzler is a non-binary queer illustrator, writer, and award-winning bartender who's spent the last seven years shaping Nashville's cocktail culture, starting at Nashville Bartending School in 2018 and then Coyote Ugly downtown.
+    </p>
+    <p>
+      Since then, Ahli's built a career in hospitality and creative work: a degree in Media, Writing, and Production from the University of Miami, a return to East Nashville's neighborhood bars, winning Nashville Whiskey Week 2024, programs like Camp Runamok, Tiki By the Sea, and Behind the Barrel, and bar tops at Tiger Bar, Bay 6, and Cafe Roze. Drinking Buddies is where all of it comes together: part illustration, part interview series, all heart.
+    </p>
+    <a class="link-chip email-link" href="https://instagram.com/drinkingbuddieszine" target="_blank" rel="noopener">@DRINKINGBUDDIESZINE &#8594;</a>
+  </div>
+</div>
+
 <script>
   const entry = document.getElementById('entry');
   const cta = document.getElementById('cta');
@@ -873,19 +905,24 @@
     });
   });
 
-  const involvedModal = document.getElementById('involvedModal');
-  const getInvolvedBtn = document.getElementById('getInvolvedBtn');
-  const involvedClose = document.getElementById('involvedClose');
+  function setupModal(overlayId, openBtnId, closeBtnId) {
+    const overlay = document.getElementById(overlayId);
+    const openBtn = document.getElementById(openBtnId);
+    const closeBtn = document.getElementById(closeBtnId);
 
-  function openInvolved() { involvedModal.hidden = false; }
-  function closeInvolved() { involvedModal.hidden = true; }
+    function open() { overlay.hidden = false; }
+    function close() { overlay.hidden = true; }
 
-  getInvolvedBtn.addEventListener('click', openInvolved);
-  involvedClose.addEventListener('click', closeInvolved);
-  involvedModal.addEventListener('click', (e) => {
-    if (e.target === involvedModal) closeInvolved();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !involvedModal.hidden) closeInvolved();
-  });
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.hidden) close();
+    });
+  }
+
+  setupModal('involvedModal', 'getInvolvedBtn', 'involvedClose');
+  setupModal('aboutModal', 'aboutBtn', 'aboutClose');
 </script>
