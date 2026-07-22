@@ -272,7 +272,9 @@
   @keyframes leg-l { 0%, 100% { transform: rotate(-16deg); } 50% { transform: rotate(16deg); } }
   @keyframes leg-r { 0%, 100% { transform: rotate(16deg); } 50% { transform: rotate(-16deg); } }
 
-  .walk { animation: patrol 6s steps(5) infinite alternate; }
+  .walk { animation-name: patrol; animation-timing-function: steps(5); animation-iteration-count: infinite; }
+  .walk-a { animation-duration: 6.2s; animation-direction: alternate; animation-delay: -1.4s; }
+  .walk-b { animation-duration: 4.6s; animation-direction: alternate-reverse; animation-delay: -3s; }
   @keyframes patrol { from { left: 6%; } to { left: 66%; } }
 
   .tender { z-index: 1; }
@@ -477,7 +479,7 @@
           <div class="arm arm-l"></div><div class="arm arm-r"></div>
           <div class="leg leg-l"></div><div class="leg leg-r"></div>
         </div>
-        <div class="sprite s2 walk" style="bottom:2.6em;">
+        <div class="sprite s2 walk walk-a" style="bottom:2.6em;">
           <div class="head"></div><div class="torso"></div>
           <div class="arm arm-l"></div><div class="arm arm-r"></div>
           <div class="leg leg-l"></div><div class="leg leg-r"></div>
@@ -504,7 +506,7 @@
           <div class="arm arm-l"></div><div class="arm arm-r"></div>
           <div class="leg leg-l"></div><div class="leg leg-r"></div>
         </div>
-        <div class="sprite s4 walk" style="bottom:3.1em;">
+        <div class="sprite s4 walk walk-b" style="bottom:3.1em;">
           <div class="head"></div><div class="torso"></div>
           <div class="arm arm-l"></div><div class="arm arm-r"></div>
           <div class="leg leg-l"></div><div class="leg leg-r"></div>
