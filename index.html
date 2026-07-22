@@ -557,6 +557,47 @@
     box-shadow: 0 0.4em 0.6em rgba(0,0,0,0.35);
   }
 
+  .party-button {
+    appearance: none;
+    position: relative;
+    z-index: 2;
+    width: 2.4em;
+    height: 2.4em;
+    margin: 0.9em auto 0;
+    display: block;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff7a6b, #c81d1d 75%);
+    border: 0.16em solid var(--ink);
+    box-shadow: 0.14em 0.14em 0 var(--ink), inset 0 -0.2em 0.3em rgba(0,0,0,0.35);
+    cursor: pointer;
+    transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
+  }
+  .party-button:hover { transform: translate(-0.03em, -0.03em); box-shadow: 0.18em 0.18em 0 var(--ink), inset 0 -0.2em 0.3em rgba(0,0,0,0.35); }
+  .party-button:active, .party-button.pressed {
+    transform: translate(0.1em, 0.1em) scale(0.94);
+    box-shadow: 0.02em 0.02em 0 var(--ink), inset 0 -0.1em 0.2em rgba(0,0,0,0.35);
+  }
+  .party-label {
+    margin: 0.35em 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    color: rgba(247,236,216,0.65);
+    text-align: center;
+  }
+
+  @keyframes party-dance { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-0.4em) rotate(6deg); } }
+  @keyframes party-arm { 0%, 100% { transform: rotate(-70deg); } 50% { transform: rotate(70deg); } }
+  @keyframes party-strobe { 0%, 100% { filter: brightness(1) saturate(1); } 50% { filter: brightness(1.3) saturate(1.5); } }
+  @keyframes party-lights { 0%, 100% { background: var(--pink); box-shadow: 0 0 0.6em 0.15em var(--pink); } 33% { background: var(--cyan); box-shadow: 0 0 0.6em 0.15em var(--cyan); } 66% { background: var(--amber); box-shadow: 0 0 0.6em 0.15em var(--amber); } }
+
+  body.party .glass { animation: party-strobe 0.25s steps(2) infinite; }
+  body.party .sprite { animation: party-dance 0.35s steps(2) infinite !important; }
+  body.party .sprite .arm-l, body.party .sprite .arm-r { animation: party-arm 0.3s steps(2) infinite !important; }
+  body.party .sprite .leg-l, body.party .sprite .leg-r { animation: leg-l 0.25s steps(2) infinite !important; }
+  body.party .disco { animation-duration: 0.7s !important; }
+  body.party .lights span { animation: party-lights 0.6s steps(3) infinite !important; }
+
   .stats-eyebrow {
     margin-top: 1.6em;
     font-family: var(--font-mono);
@@ -674,7 +715,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .star, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow, .author-jump {
+    .star, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow, .author-jump,
+    body.party .glass, body.party .sprite, body.party .sprite .arm-l, body.party .sprite .arm-r,
+    body.party .sprite .leg-l, body.party .sprite .leg-r, body.party .disco, body.party .lights span {
       animation: none !important;
     }
   }
@@ -798,6 +841,9 @@
 
   <div class="foot"></div>
 
+  <button class="party-button" id="partyBtn" type="button" aria-label="Start the party"></button>
+  <p class="party-label">PUSH ME</p>
+
   <p class="stats-eyebrow">&#10022; OUT IN THE WILD RIGHT NOW &#10022;</p>
   <div class="stats-plaque">
     <div class="stat">
@@ -867,17 +913,29 @@
     <h3 id="aboutTitle">ABOUT THE AUTHOR</h3>
     <p>
       <span class="section-title">The Zine</span>
-      It started with a birdhouse on Woodland Street: ten hand-made copies, tucked away for whoever found them. That tiny experiment grew into a quarterly zine passed around some of Nashville's best bars, now distributed through mini bar stands built to showcase the bars they sit in.
+      It all started with a little birdhouse on Woodland Street, where just ten hand-made copies were tucked away for whoever happened to find them. What began as a tiny experiment has grown into a quarterly zine passed around some of Nashville's best bars, now with over a thousand copies in the wild distributed through miniture bar stands built to showcase the bars they open in.
     </p>
     <p>
-      At its heart, this zine is about the bartenders of East Nashville: the people behind the classic cocktails you'll actually want to make, and the stories that come after last call. Every issue features three bartenders, their spin on a drink, and the history behind it. Expect illustrated stories from behind the bar, hospitality humor, resources for working bartenders, and shoutouts to the side hustles that make this community what it is.
+      At its heart, this zine is about the bartenders of East Nashville: the people behind East's Favorites classic cocktails (with recipes you'll actually want to try), and the stories that unfold after last call. Every issue highlights three bartenders, their spin on a drink, and the history that inspired it.
+    </p>
+    <p>
+      But it's more than recipes. Between these pages you'll find illustrated tales from behind the bar, a dose of hospitality humor, resources for working bartenders, and shoutouts to side hustles and passions that make this community so vibrant. Along the way, the zine has sparked pop-ups around East Nashville, complete with badass cocktail menus, and continues to serve one main purpose: to celebrate the artistry, grit, and heart of hospitality in our town.
     </p>
     <p>
       <span class="section-title">About Ahli</span>
-      Illustrator, writer, bad speller, miniature builder. Ahli Switzler is a non-binary queer illustrator, writer, and award-winning bartender who's spent the last seven years shaping Nashville's cocktail culture, starting at Nashville Bartending School in 2018 and then Coyote Ugly downtown.
+      Illustrator, Creator, Bad Speller, Miniature Builder, and Author.
     </p>
     <p>
-      Since then, Ahli's built a career in hospitality and creative work: a degree in Media, Writing, and Production from the University of Miami, a return to East Nashville's neighborhood bars, winning Nashville Whiskey Week 2024, programs like Camp Runamok, Tiki By the Sea, and Behind the Barrel, and bar tops at Tiger Bar, Bay 6, and Cafe Roze. Drinking Buddies is where all of it comes together: part illustration, part interview series, all heart.
+      A firm believer in a rising tide raises all ships, Ahli Switzler is a non-binary queer illustrator, writer, and award-winning bartender who has spent the last seven years shaping Nashville's cocktail culture. Their journey began at Nashville Bartending School in 2018, which quickly led to high-energy nights behind the bar at Coyote Ugly downtown. Since then, Ahli has built a career steeped in hospitality, creativity, and community, trading cowboy boots for kitchen shoes and developing a deep passion for niche amaros and craft cocktails.
+    </p>
+    <p>
+      After earning a degree in Media, Writing, and Production from the University of Miami, Ahli returned to East Nashville to work exclusively in neighborhood bars that prize personality as much as skill. Over the past five years, they've cultivated an impressive résumé: winning Nashville Whiskey Week 2024, attending elite programs like Camp Runamok, Tiki By the Sea, and Behind the Barrel, and holding down bar tops at some of the city's most beloved spots including Tiger Bar, Bay 6, and Cafe Roze.
+    </p>
+    <p>
+      Along the way, they've honed a reputation not only for mixing and serving but also for storytelling: entertaining guests, building lifelong friendships, and curating spaces where locals and tourists alike feel at home.
+    </p>
+    <p>
+      That same passion for people, drinks, and laughter fuels Drinking Buddies, Ahli's ongoing project. Part illustration, part interview series, and all heart, the zine captures the wild, funny, and fiercely loving community that has defined Ahli's life behind the bar. Their goal is simple but ambitious: to give readers a unique glimpse into Nashville's vibrant bartending world, one filled with artistry, resilience, and joy.
     </p>
     <a class="link-chip email-link" href="https://instagram.com/drinkingbuddieszine" target="_blank" rel="noopener">@DRINKINGBUDDIESZINE &#8594;</a>
   </div>
@@ -925,4 +983,19 @@
 
   setupModal('involvedModal', 'getInvolvedBtn', 'involvedClose');
   setupModal('aboutModal', 'aboutBtn', 'aboutClose');
+
+  const partyBtn = document.getElementById('partyBtn');
+  let partyTimeout = null;
+
+  function startParty() {
+    document.body.classList.add('party');
+    partyBtn.classList.add('pressed');
+    clearTimeout(partyTimeout);
+    partyTimeout = setTimeout(() => {
+      document.body.classList.remove('party');
+      partyBtn.classList.remove('pressed');
+    }, 5000);
+  }
+
+  partyBtn.addEventListener('click', startParty);
 </script>
