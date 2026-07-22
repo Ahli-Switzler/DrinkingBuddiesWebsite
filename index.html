@@ -438,29 +438,33 @@
     margin: 0 auto;
   }
   .issue-card {
+    position: relative;
     aspect-ratio: 3/4;
     border-radius: 0.5em;
     border: 0.2em solid var(--ink);
     box-shadow: 0.14em 0.14em 0 var(--ink);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 0.6em;
+    overflow: hidden;
+    display: block;
+    background: var(--cream);
+    text-decoration: none;
+    transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
+  }
+  .issue-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .issue-card .issue-label {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(23,15,40,0.75);
+    color: var(--cream);
     font-family: var(--font-display);
-    font-size: 0.6em;
-    color: var(--ink);
+    font-size: 0.55em;
+    padding: 0.6em 0.3em;
+    text-align: center;
   }
-  .issue-card:nth-child(1) { background: var(--pink); }
-  .issue-card:nth-child(2) { background: var(--amber); }
-  .issue-card:nth-child(3) { background: var(--cyan); }
-  .issue-card:nth-child(4) { background: #a5ea6a; }
-  .issue-card:nth-child(5) { background: #ffe58a; }
-  .placeholder-note {
-    margin-top: 1.4em;
-    font-family: var(--font-mono);
-    font-size: 0.85em;
-    color: rgba(247,236,216,0.55);
+  .issue-card:hover, .issue-card:focus-visible {
+    transform: translate(-0.06em, -0.06em);
+    box-shadow: 0.2em 0.2em 0 var(--ink);
   }
+  .issue-card:active { transform: translate(0.05em, 0.05em); box-shadow: 0.05em 0.05em 0 var(--ink); }
 
   @media (prefers-reduced-motion: reduce) {
     .star, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow {
@@ -587,16 +591,16 @@
 </main>
 
 <section class="archive-teaser" id="archiveTeaser" hidden>
-  <h2>5 issues on the shelf</h2>
-  <p>This is where the page-flip reader lives once it's built. For now, here's the shape of it: five issues, each opening into a simple flip-through reader pulled from your PDFs.</p>
+  <h2>6 issues on the shelf</h2>
+  <p>Pick an issue to flip through it, page by page.</p>
   <div class="issue-grid">
-    <div class="issue-card">01</div>
-    <div class="issue-card">02</div>
-    <div class="issue-card">03</div>
-    <div class="issue-card">04</div>
-    <div class="issue-card">05</div>
+    <a class="issue-card" href="reader.html?issue=1"><img src="issues/issue-1/page-01.jpg" alt="Issue 1 cover"><span class="issue-label">ISSUE 1</span></a>
+    <a class="issue-card" href="reader.html?issue=2"><img src="issues/issue-2/page-01.jpg" alt="Issue 2 cover"><span class="issue-label">ISSUE 2</span></a>
+    <a class="issue-card" href="reader.html?issue=3"><img src="issues/issue-3/page-01.jpg" alt="Issue 3 cover"><span class="issue-label">ISSUE 3</span></a>
+    <a class="issue-card" href="reader.html?issue=4"><img src="issues/issue-4/page-01.jpg" alt="Issue 4 cover"><span class="issue-label">ISSUE 4</span></a>
+    <a class="issue-card" href="reader.html?issue=5"><img src="issues/issue-5/page-01.jpg" alt="Issue 5 cover"><span class="issue-label">ISSUE 5</span></a>
+    <a class="issue-card" href="reader.html?issue=6"><img src="issues/issue-6/page-01.jpg" alt="Issue 6 cover"><span class="issue-label">ISSUE 6</span></a>
   </div>
-  <p class="placeholder-note">placeholder — real covers + reader come next</p>
 </section>
 
 <script>

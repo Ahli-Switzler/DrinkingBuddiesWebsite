@@ -1,0 +1,205 @@
+<meta charset="utf-8">
+<title>Drinking Buddies Zine — Reader</title>
+<style>
+  :root {
+    --ink: #170f28;
+    --dusk: #2f1360;
+    --dusk-glow: #4d2a8f;
+    --cream: #f7ecd8;
+    --pink: #ffa8d6;
+    --cyan: #96e8de;
+    --amber: #ffcf3f;
+    --font-mono: 'DejaVu Sans Mono', 'SFMono-Regular', Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--dusk);
+    background-image:
+      linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px),
+      radial-gradient(ellipse 120% 60% at 50% 0%, var(--dusk-glow) 0%, transparent 65%);
+    background-size: clamp(22px, 3.6vw, 42px) clamp(22px, 3.6vw, 42px), clamp(22px, 3.6vw, 42px) clamp(22px, 3.6vw, 42px), 100% 100%;
+    color: var(--cream);
+    font-family: var(--font-mono);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    max-width: 50em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    padding: 1.2em 1em 0.6em;
+    flex-wrap: wrap;
+  }
+  header a.back {
+    color: var(--ink);
+    background: var(--cream);
+    border: 0.14em solid var(--ink);
+    border-radius: 0.35em;
+    padding: 0.4em 0.8em;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85em;
+    box-shadow: 0.12em 0.12em 0 var(--ink);
+  }
+  header a.back:hover { background: var(--amber); }
+  #issueTitle {
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 0.02em;
+  }
+
+  main {
+    width: 100%;
+    max-width: 50em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.6em 1em 2em;
+    flex: 1;
+  }
+
+  .viewer {
+    position: relative;
+    width: 100%;
+    max-width: 26em;
+    background: var(--cream);
+    border: 0.16em solid var(--ink);
+    border-radius: 0.6em;
+    box-shadow: 0.2em 0.2em 0 var(--ink);
+    overflow: hidden;
+  }
+  .viewer img {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .zone {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 40%;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  .zone.prev { left: 0; }
+  .zone.next { right: 0; }
+  .zone:focus-visible { outline: 0.2em dashed var(--ink); outline-offset: -0.2em; }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+  }
+  .controls button {
+    background: var(--cream);
+    color: var(--ink);
+    border: 0.14em solid var(--ink);
+    border-radius: 0.35em;
+    padding: 0.5em 0.9em;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.9em;
+    cursor: pointer;
+    box-shadow: 0.12em 0.12em 0 var(--ink);
+  }
+  .controls button:hover:not(:disabled) { background: var(--pink); }
+  .controls button:disabled { opacity: 0.4; cursor: default; }
+  #pageCount {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    min-width: 5em;
+    text-align: center;
+  }
+
+  .missing {
+    padding: 3em 1em;
+    text-align: center;
+    max-width: 30em;
+  }
+  .missing a { color: var(--cyan); }
+</style>
+
+<header>
+  <a class="back" href="index.html">&#8592; BACK</a>
+  <span id="issueTitle"></span>
+</header>
+
+<main>
+  <div class="viewer" id="viewer">
+    <img id="pageImg" alt="">
+    <button class="zone prev" id="prevZone" aria-label="Previous page"></button>
+    <button class="zone next" id="nextZone" aria-label="Next page"></button>
+  </div>
+  <div class="controls">
+    <button id="prevBtn">&#8592; PREV</button>
+    <span id="pageCount"></span>
+    <button id="nextBtn">NEXT &#8594;</button>
+  </div>
+</main>
+
+<script>
+  const PAGE_COUNTS = { 1: 25, 2: 27, 3: 29, 4: 34, 5: 32, 6: 29 };
+
+  const params = new URLSearchParams(location.search);
+  const issue = parseInt(params.get('issue'), 10);
+  const total = PAGE_COUNTS[issue];
+
+  const main = document.querySelector('main');
+  const issueTitle = document.getElementById('issueTitle');
+
+  if (!total) {
+    main.innerHTML = '<div class="missing">Couldn\'t find that issue. <a href="index.html">Back to the archive</a>.</div>';
+  } else {
+    issueTitle.textContent = 'ISSUE ' + issue;
+    document.title = 'Drinking Buddies Zine — Issue ' + issue;
+
+    let page = 1;
+    const img = document.getElementById('pageImg');
+    const pageCount = document.getElementById('pageCount');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function render() {
+      img.src = 'issues/issue-' + issue + '/page-' + pad(page) + '.jpg';
+      img.alt = 'Issue ' + issue + ', page ' + page;
+      pageCount.textContent = page + ' / ' + total;
+      prevBtn.disabled = page <= 1;
+      nextBtn.disabled = page >= total;
+    }
+
+    function go(delta) {
+      const next = page + delta;
+      if (next < 1 || next > total) return;
+      page = next;
+      render();
+    }
+
+    prevBtn.addEventListener('click', () => go(-1));
+    nextBtn.addEventListener('click', () => go(1));
+    document.getElementById('prevZone').addEventListener('click', () => go(-1));
+    document.getElementById('nextZone').addEventListener('click', () => go(1));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') go(-1);
+      if (e.key === 'ArrowRight') go(1);
+    });
+
+    render();
+  }
+</script>
