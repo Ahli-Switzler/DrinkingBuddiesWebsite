@@ -186,6 +186,7 @@
     max-width: 26em;
   }
   .link-chip {
+    appearance: none;
     background: var(--cream);
     color: var(--ink);
     border: 0.14em solid var(--ink);
@@ -196,6 +197,7 @@
     font-weight: 700;
     letter-spacing: 0.01em;
     text-decoration: none;
+    cursor: pointer;
     box-shadow: 0.12em 0.12em 0 var(--ink);
     transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
   }
@@ -203,6 +205,154 @@
   .link-chip:active { transform: translate(0.05em, 0.05em); box-shadow: 0.03em 0.03em 0 var(--ink); }
   .link-chip.soon { opacity: 0.55; cursor: default; pointer-events: none; }
   .link-chip .soon-badge { font-size: 0.75em; opacity: 0.8; }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(23,15,40,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2em;
+  }
+  .modal-overlay[hidden] { display: none; }
+  .modal-box {
+    position: relative;
+    width: 100%;
+    max-width: 30em;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--cream);
+    color: var(--ink);
+    border: 0.2em solid var(--ink);
+    border-radius: 0.6em;
+    box-shadow: 0.3em 0.3em 0 var(--ink);
+    padding: 1.6em 1.6em 1.8em;
+    font-family: var(--font-mono);
+    font-size: 16px;
+  }
+  .modal-box h3 {
+    font-family: var(--font-display);
+    font-size: 1em;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0.2em 0 1em;
+  }
+  .modal-box p { margin: 0 0 1.1em; line-height: 1.5; font-size: 0.95em; }
+  .modal-box .section-title {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 0.82em;
+    color: var(--ink);
+    border-bottom: 0.1em solid var(--ink);
+    padding-bottom: 0.15em;
+    margin-bottom: 0.4em;
+  }
+  .modal-close {
+    position: absolute;
+    top: 0.6em;
+    right: 0.6em;
+    width: 1.8em;
+    height: 1.8em;
+    background: var(--pink);
+    color: var(--ink);
+    border: 0.12em solid var(--ink);
+    border-radius: 0.3em;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0.08em 0.08em 0 var(--ink);
+  }
+  .modal-close:hover { background: var(--amber); }
+  .modal-box .email-link {
+    display: block;
+    text-align: center;
+    background: var(--cyan);
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  .author-jump {
+    position: relative;
+    width: 3.4em;
+    height: 6em;
+    margin: 0 auto 1em;
+    animation: author-hop 0.9s steps(4) infinite;
+  }
+  @keyframes author-hop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.5em); } }
+  .author-jump .cap {
+    position: absolute;
+    top: -0.1em; left: 50%;
+    margin-left: -0.9em;
+    width: 1.8em; height: 0.8em;
+    background: var(--ink);
+    border-radius: 0.9em 0.9em 0 0;
+    z-index: 3;
+  }
+  .author-jump .cap::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: -0.6em;
+    width: 1em; height: 0.3em;
+    background: var(--ink);
+    border-radius: 0 0 0.4em 0.2em;
+  }
+  .author-jump .hair {
+    position: absolute;
+    top: 0.5em; left: 50%;
+    margin-left: -1em;
+    width: 2em; height: 1.9em;
+    background: #1c1c1c;
+    border-radius: 0.4em 0.4em 0.7em 0.7em;
+    z-index: 1;
+  }
+  .author-jump .head {
+    position: absolute;
+    top: 0.65em; left: 50%;
+    margin-left: -0.65em;
+    width: 1.3em; height: 1.3em;
+    background: #e8b98a;
+    border: 0.08em solid var(--ink);
+    border-radius: 0.25em;
+    z-index: 2;
+  }
+  .author-jump .torso {
+    position: absolute;
+    top: 1.95em; left: 50%;
+    margin-left: -1.3em;
+    width: 2.6em; height: 2.1em;
+    background: var(--amber);
+    border: 0.1em solid var(--ink);
+    border-radius: 0.35em;
+    z-index: 2;
+  }
+  .author-jump .arm {
+    position: absolute;
+    top: 2em;
+    width: 0.6em; height: 1.5em;
+    background: #e8b98a;
+    border: 0.08em solid var(--ink);
+    border-radius: 0.3em;
+    transform-origin: top center;
+    z-index: 3;
+  }
+  .author-jump .arm-l { left: -0.35em; transform: rotate(-60deg); }
+  .author-jump .arm-r { right: -0.35em; transform: rotate(60deg); }
+  .author-jump .leg {
+    position: absolute;
+    top: 3.9em;
+    width: 1.15em; height: 1.9em;
+    background: #5b7bb0;
+    border: 0.09em solid var(--ink);
+    border-radius: 0.2em;
+  }
+  .author-jump .leg-l { left: 0.5em; }
+  .author-jump .leg-r { right: 0.5em; }
   @keyframes cta-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.18em); } }
   @keyframes arrow-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(0.15em); } }
 
@@ -524,7 +674,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .star, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow {
+    .star, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow, .author-jump {
       animation: none !important;
     }
   }
@@ -560,7 +710,9 @@
   <div class="link-row">
     <a class="link-chip" href="https://ahli-switzler.github.io/DrinkingBuddiesZine/" target="_blank" rel="noopener">PLAY THE GAME</a>
     <a class="link-chip" href="https://square.link/u/VrNoKWtz" target="_blank" rel="noopener">KEEP THE LIGHTS ON</a>
+    <button class="link-chip" id="getInvolvedBtn" type="button">GET INVOLVED</button>
     <span class="link-chip soon" aria-disabled="true">EVENTS <span class="soon-badge">(soon)</span></span>
+    <span class="link-chip soon" aria-disabled="true">ABOUT THE AUTHOR <span class="soon-badge">(soon)</span></span>
   </div>
 
   <div class="frame">
@@ -673,6 +825,32 @@
   </div>
 </section>
 
+<div class="modal-overlay" id="involvedModal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="involvedTitle">
+    <button class="modal-close" id="involvedClose" type="button" aria-label="Close">&#10005;</button>
+    <div class="author-jump">
+      <div class="cap"></div>
+      <div class="hair"></div>
+      <div class="head"></div>
+      <div class="arm arm-l"></div>
+      <div class="arm arm-r"></div>
+      <div class="torso"></div>
+      <div class="leg leg-l"></div>
+      <div class="leg leg-r"></div>
+    </div>
+    <h3 id="involvedTitle">WANT IN?</h3>
+    <p>
+      <span class="section-title">Bartenders</span>
+      Pop-ups, features, or just talking shop — we want to hear from you. We're also teaming up with <strong>Fly Pelican Fly</strong> on a new pop-up series: bring your concept, get paid to run it.
+    </p>
+    <p>
+      <span class="section-title">Brands</span>
+      Want your brand in these pages? We've got sponsor packages for spirits education, competitions, nonprofit events, or anything badass. We work until you're happy, and we love championing brands that give back to the Nashville scene.
+    </p>
+    <a class="link-chip email-link" href="mailto:drinkingbuddieszine@gmail.com">EMAIL US &#8594;</a>
+  </div>
+</div>
+
 <script>
   const entry = document.getElementById('entry');
   const cta = document.getElementById('cta');
@@ -693,5 +871,21 @@
         openArchive();
       }
     });
+  });
+
+  const involvedModal = document.getElementById('involvedModal');
+  const getInvolvedBtn = document.getElementById('getInvolvedBtn');
+  const involvedClose = document.getElementById('involvedClose');
+
+  function openInvolved() { involvedModal.hidden = false; }
+  function closeInvolved() { involvedModal.hidden = true; }
+
+  getInvolvedBtn.addEventListener('click', openInvolved);
+  involvedClose.addEventListener('click', closeInvolved);
+  involvedModal.addEventListener('click', (e) => {
+    if (e.target === involvedModal) closeInvolved();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !involvedModal.hidden) closeInvolved();
   });
 </script>
