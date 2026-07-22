@@ -1,11 +1,12 @@
-# Drinking Buddies Zine — Website
+# Drinking Buddies Zine: Website
 
-A blog-style archive site for Drinking Buddies Zine, replacing the old Squarespace carousel with a retro pixel-art homepage: a glowing lantern-shaped zine stand with a 3-floor bar diorama (rooftop lounge, dance floor, ground-floor bar + patio), modeled after the physical lantern zine stand. Clicking the sign opens the issue archive.
+A blog-style archive site for Drinking Buddies Zine, replacing the old Squarespace carousel with a retro pixel-art homepage: a glowing lantern-shaped zine stand with a 3-floor bar diorama (rooftop lounge, dance floor, ground-floor bar and kitchen prep area), modeled after the physical lantern zine stand. Clicking the sign opens the issue archive.
 
 ## Status
 
-- `index.html` — homepage prototype (pixel-art scene + click-through to a placeholder archive teaser). Plain HTML/CSS/JS, no build step.
-- Archive/reader (page-flip through the 5 existing issues) — not yet built. Homepage look/feel is being locked down first.
+- `index.html`: homepage (pixel-art scene, circulation stats, link row, Get Involved modal, click-through to the issue archive). Plain HTML/CSS/JS, no build step.
+- `reader.html`: simple page-flip reader for each issue.
+- `issues/issue-N/`: web-sized JPEG pages extracted from the source PDFs (the originals are print-resolution and too large for the repo, so only the rendered pages are committed).
 
 ## Running locally
 
