@@ -987,6 +987,11 @@
       Pop-up night, July 28th. Two Nashville zines, one gallery night.
     </p>
     <a class="link-chip email-link" href="table-popup.html" target="_blank" rel="noopener">VIEW EVENT PAGE &#8594;</a>
+    <p style="margin-top: 1.4em;">
+      <span class="section-title">Past Events</span>
+      The Great Summer Daiq Off, July 6th. A daiquiri competition with Trovador Rum and Lost &amp; Found: 13 bars, 175 heads, one winner.
+    </p>
+    <a class="link-chip email-link" href="events/daiq-off/index.html" target="_blank" rel="noopener">SEE THE RECAP &#8594;</a>
   </div>
 </div>
 
@@ -1033,6 +1038,10 @@
   setupModal('involvedModal', 'getInvolvedBtn', 'involvedClose');
   setupModal('aboutModal', 'aboutBtn', 'aboutClose');
   setupModal('eventsModal', 'eventsBtn', 'eventsClose');
+
+  if (location.hash === '#get-involved') {
+    document.getElementById('getInvolvedBtn').click();
+  }
 
   const partyBtn = document.getElementById('partyBtn');
   let partyTimeout = null;

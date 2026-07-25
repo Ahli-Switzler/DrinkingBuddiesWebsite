@@ -1,0 +1,322 @@
+<meta charset="utf-8">
+<title>The Great Summer Daiq Off: Drinking Buddies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f3e8c8;
+    --parchment-deep: #ecdfb8;
+    --forest: #1f4a32;
+    --forest-deep: #163524;
+    --ink: #1c2b1f;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Lora', serif;
+    display: flex;
+    justify-content: center;
+    padding: 1.4em;
+  }
+
+  .frame {
+    width: 100%;
+    max-width: 40em;
+    border: 0.35em double var(--forest);
+    border-radius: 0.3em;
+    padding: 2em 1.6em 2.4em;
+    position: relative;
+    background: var(--parchment);
+  }
+
+  .corner {
+    position: absolute;
+    width: 2.6em;
+    height: 2.6em;
+    color: var(--forest);
+    opacity: 0.85;
+  }
+  .corner.tl { top: -0.05em; left: -0.05em; }
+  .corner.tr { top: -0.05em; right: -0.05em; transform: scaleX(-1); }
+  .corner.bl { bottom: -0.05em; left: -0.05em; transform: scaleY(-1); }
+  .corner.br { bottom: -0.05em; right: -0.05em; transform: scale(-1,-1); }
+
+  a.back {
+    display: inline-block;
+    color: var(--forest);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85em;
+    border-bottom: 0.1em solid var(--forest);
+    margin-bottom: 1.6em;
+  }
+  a.back:hover { opacity: 0.7; }
+
+  .eyebrow {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.75em;
+    color: var(--forest);
+    margin: 0 0 0.5em;
+  }
+  h1 {
+    font-family: 'Bevan', serif;
+    text-align: center;
+    color: var(--forest);
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0 0 0.3em;
+  }
+  .subtitle {
+    text-align: center;
+    font-style: italic;
+    font-size: 1em;
+    color: var(--forest-deep);
+    margin: 0 0 1.4em;
+  }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    color: var(--forest);
+    margin: 1.4em 0;
+  }
+  .rule::before, .rule::after {
+    content: "";
+    flex: 1;
+    height: 0.09em;
+    background: var(--forest);
+    opacity: 0.4;
+    max-width: 6em;
+  }
+  .rule span { font-size: 0.8em; letter-spacing: 0.3em; }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9em;
+    margin: 1.6em 0;
+  }
+  .stat {
+    width: 6.4em;
+    height: 6.4em;
+    border-radius: 50%;
+    border: 0.16em solid var(--forest);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.4em;
+  }
+  .stat .num {
+    font-family: 'Bevan', serif;
+    font-size: 1.35em;
+    color: var(--forest);
+    line-height: 1.1;
+  }
+  .stat .label {
+    font-size: 0.62em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--forest-deep);
+    margin-top: 0.2em;
+  }
+
+  .winner-ribbon {
+    background: var(--forest);
+    color: var(--parchment);
+    text-align: center;
+    font-family: 'Bevan', serif;
+    font-size: 1.15em;
+    letter-spacing: 0.03em;
+    padding: 0.6em 1em;
+    border-radius: 0.3em;
+    margin: 1.6em auto;
+    max-width: 24em;
+  }
+  .winner-ribbon small {
+    display: block;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.55em;
+    letter-spacing: 0;
+    margin-top: 0.3em;
+    opacity: 0.85;
+  }
+
+  h2 {
+    font-family: 'Bevan', serif;
+    color: var(--forest);
+    font-size: 1.15em;
+    text-align: center;
+    margin: 1.8em 0 0.8em;
+  }
+
+  p { line-height: 1.7; font-size: 0.98em; margin: 0 0 1em; }
+  p:last-of-type { margin-bottom: 0; }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+    margin: 1.2em 0 1.8em;
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 0.12em solid var(--forest);
+    border-radius: 0.2em;
+    display: block;
+  }
+
+  .rounds {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9em;
+    margin: 1em 0 1.6em;
+  }
+  .round {
+    border: 0.1em solid var(--forest);
+    border-radius: 0.4em;
+    padding: 0.9em 1em;
+  }
+  .round .name {
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 0.3em;
+    font-size: 0.95em;
+  }
+  .round p { font-size: 0.88em; margin-bottom: 0; }
+
+  .lineup {
+    columns: 2;
+    column-gap: 1.4em;
+    margin: 0.4em 0 1.6em;
+    font-size: 0.92em;
+  }
+  .lineup li { margin-bottom: 0.5em; break-inside: avoid; }
+  .lineup li.winner { font-weight: 700; color: var(--forest); }
+  .lineup li.winner::after { content: " \2605"; }
+
+  .sponsors {
+    text-align: center;
+    font-size: 0.85em;
+    color: var(--forest-deep);
+    margin: 1.6em 0 0.4em;
+  }
+  .sponsors strong { color: var(--forest); }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7em;
+    margin-top: 1.8em;
+  }
+  .cta {
+    display: inline-block;
+    border: 0.12em solid var(--forest);
+    color: var(--forest);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85em;
+    padding: 0.55em 1.1em;
+    border-radius: 2em;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .cta:hover { background: var(--forest); color: var(--parchment); }
+  .cta.solid { background: var(--forest); color: var(--parchment); }
+  .cta.solid:hover { background: var(--forest-deep); }
+
+  @media (max-width: 420px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .lineup { columns: 1; }
+  }
+</style>
+
+<div class="frame">
+  <svg class="corner tl" viewBox="0 0 40 40"><path d="M2 2 Q2 20 20 20 Q2 20 2 38" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="2" cy="2" r="3" fill="currentColor"/></svg>
+  <svg class="corner tr" viewBox="0 0 40 40"><path d="M2 2 Q2 20 20 20 Q2 20 2 38" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="2" cy="2" r="3" fill="currentColor"/></svg>
+  <svg class="corner bl" viewBox="0 0 40 40"><path d="M2 2 Q2 20 20 20 Q2 20 2 38" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="2" cy="2" r="3" fill="currentColor"/></svg>
+  <svg class="corner br" viewBox="0 0 40 40"><path d="M2 2 Q2 20 20 20 Q2 20 2 38" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="2" cy="2" r="3" fill="currentColor"/></svg>
+
+  <a class="back" href="../../index.html">&#8592; Drinking Buddies Zine</a>
+
+  <p class="eyebrow">Past Event &middot; July 6, 2026</p>
+  <h1>The Great<br>Summer Daiq Off</h1>
+  <p class="subtitle">Drinking Buddies &times; Trovador Rum &times; Lost &amp; Found</p>
+
+  <div class="stats">
+    <div class="stat"><span class="num">175</span><span class="label">heads</span></div>
+    <div class="stat"><span class="num">13</span><span class="label">bars</span></div>
+    <div class="stat"><span class="num">3 hrs</span><span class="label">runtime</span></div>
+    <div class="stat"><span class="num">200+</span><span class="label">IG shares</span></div>
+  </div>
+
+  <div class="winner-ribbon">Winner: Cherries<small>$500 from Trovador Rum + a two-page cover feature</small></div>
+
+  <div class="rule"><span>&#10022;</span></div>
+
+  <h2>How It Came Together</h2>
+  <p>Jamie White, owner of Lost &amp; Found, came to Drinking Buddies and Trovador Rum, a Nashville rum brand, wanting to put on a daiquiri competition. Drinking Buddies built the event structure and pulled in our network of bars from across the city, and together we created a once-in-a-summer experience that's now becoming an annual event at Lost &amp; Found.</p>
+  <p>We generated a lot of hype on a very limited budget: over 200 shares of the event on Instagram, a packed rooftop, and glowing feedback from everyone who came out.</p>
+
+  <div class="gallery">
+    <img src="photo-01.jpg" alt="Rooftop venue at Lost and Found decorated for the Great Summer Daiq Off">
+    <img src="photo-02.jpg" alt="Bartenders prepping ingredients at the competition table">
+    <img src="photo-03.jpg" alt="Crowd gathered on the rooftop under the Daiq Off banner">
+    <img src="photo-04.jpg" alt="Rooftop deck packed with guests under string lights at sunset">
+    <img src="photo-05.jpg" alt="Bartender pouring drinks behind the bar for guests">
+    <img src="photo-06.jpg" alt="Guests seated and mingling on the rooftop in the evening">
+  </div>
+
+  <h2>How It Ran</h2>
+  <div class="rounds">
+    <div class="round">
+      <p class="name">Round 1 &middot; People's Choice</p>
+      <p>Guests got a $10 wristband and a Trovador coaster as their voting coin for the night, dropping it at the bar of their choice. The three bars with the most coasters advanced to the judges' round.</p>
+    </div>
+    <div class="round">
+      <p class="name">Round 2 &middot; Dagger Pull</p>
+      <p>The top three bars drew a dagger from the ingredients box, pull order set by ranking, first place pulling first. Each dagger carried a different level of challenge, and whatever got pulled had to go into the daiquiri. A panel of judges picked the winner and the $500 prize.</p>
+    </div>
+  </div>
+
+  <h2>The Competition</h2>
+  <ul class="lineup">
+    <li>Barrel Proof</li>
+    <li>Pearl Diver</li>
+    <li>Rosemary &amp; Beauty Queen</li>
+    <li class="winner">Cherries</li>
+    <li>White Limozeen</li>
+    <li>GOODTIMES</li>
+    <li>Love's Alibi</li>
+    <li>The Fox Bar &amp; Cocktail Club</li>
+    <li>Martha My Dear</li>
+    <li>Strega</li>
+    <li>Roy's</li>
+    <li>Verna</li>
+    <li>Eleven11</li>
+  </ul>
+
+  <p class="sponsors">Sponsored by <strong>Trovador Rum</strong> and <strong>Verde</strong></p>
+
+  <div class="rule"><span>&#10022;</span></div>
+
+  <p style="text-align:center; font-style: italic;">Want to see your brand behind something like this?</p>
+  <div class="cta-row">
+    <a class="cta solid" href="../../index.html#get-involved">Get Involved</a>
+    <a class="cta" href="../../index.html">Back to Drinking Buddies Zine</a>
+  </div>
+</div>
