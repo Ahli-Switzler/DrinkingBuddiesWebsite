@@ -1,0 +1,292 @@
+<meta charset="utf-8">
+<title>Potions &amp; Paws: Drinking Buddies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #1a1420;
+    --midnight-deep: #100c14;
+    --pumpkin: #d9812e;
+    --pumpkin-deep: #a8531c;
+    --wine: #7a2020;
+    --bone: #f3e9d8;
+    --ink: #1a1420;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(217,129,46,0.35), transparent 60%),
+      var(--midnight);
+    color: var(--bone);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2em 1.1em 6em;
+  }
+
+  .page { width: 100%; max-width: 30em; }
+
+  a.back {
+    display: inline-block;
+    color: var(--midnight);
+    background: var(--bone);
+    border: 0.14em solid var(--midnight);
+    border-radius: 2em;
+    padding: 0.4em 0.9em;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.78em;
+    box-shadow: 0.1em 0.1em 0 rgba(0,0,0,0.4);
+    margin-bottom: 1.6em;
+  }
+  a.back:hover { background: #fff; }
+
+  .eyebrow {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72em;
+    color: var(--pumpkin);
+    margin: 0 0 0.4em;
+  }
+  h1 {
+    font-family: 'Creepster', cursive;
+    text-align: center;
+    color: var(--bone);
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin: 0 0 0.3em;
+    text-shadow: 0 0 0.3em rgba(217,129,46,0.6), 0.04em 0.04em 0 rgba(0,0,0,0.5);
+  }
+  .subtitle {
+    text-align: center;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.95em;
+    color: var(--pumpkin);
+    margin: 0 0 1.6em;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8em;
+    margin: 1.6em 0;
+  }
+  .stat {
+    width: 5.8em;
+    height: 5.8em;
+    border-radius: 50%;
+    border: 0.14em solid var(--pumpkin);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.4em;
+    background: rgba(217,129,46,0.08);
+  }
+  .stat .num { font-family: 'Creepster', cursive; font-size: 1.25em; color: var(--pumpkin); line-height: 1; }
+  .stat .label { font-size: 0.58em; text-transform: uppercase; letter-spacing: 0.03em; color: var(--bone); opacity: 0.75; margin-top: 0.3em; }
+
+  .check-callout {
+    text-align: center;
+    margin: 1.8em 0;
+  }
+  .check-callout img {
+    width: 100%;
+    border-radius: 0.6em;
+    border: 0.16em solid var(--pumpkin);
+    box-shadow: 0 0.3em 0.8em rgba(0,0,0,0.5);
+  }
+  .check-callout p {
+    font-family: 'Creepster', cursive;
+    font-size: 1.3em;
+    color: var(--pumpkin);
+    letter-spacing: 0.02em;
+    margin: 0.6em 0 0;
+  }
+  .check-callout small {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.65em;
+    color: var(--bone);
+    opacity: 0.7;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-top: 0.3em;
+  }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    color: var(--pumpkin);
+    margin: 1.8em 0;
+  }
+  .rule::before, .rule::after {
+    content: "";
+    flex: 1;
+    height: 0.08em;
+    background: var(--pumpkin);
+    opacity: 0.4;
+    max-width: 6em;
+  }
+
+  h2 {
+    font-family: 'Creepster', cursive;
+    color: var(--pumpkin);
+    font-size: 1.5em;
+    letter-spacing: 0.02em;
+    text-align: center;
+    margin: 1.6em 0 0.7em;
+  }
+
+  p { line-height: 1.7; font-size: 0.95em; margin: 0 0 1em; }
+  p:last-of-type { margin-bottom: 0; }
+  strong { color: var(--pumpkin); }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+    margin: 1em 0 1.8em;
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 0.12em solid var(--pumpkin);
+    border-radius: 0.3em;
+    display: block;
+  }
+
+  .cocktails {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 1em 0 1.8em;
+  }
+  .cocktail-card {
+    border-radius: 0.6em;
+    overflow: hidden;
+    border: 0.14em solid var(--pumpkin);
+  }
+  .cocktail-card img { width: 100%; display: block; }
+  .cocktail-card .credit {
+    background: rgba(217,129,46,0.12);
+    text-align: center;
+    font-size: 0.75em;
+    padding: 0.5em;
+    letter-spacing: 0.02em;
+  }
+
+  .partners {
+    text-align: center;
+    font-size: 0.88em;
+    color: var(--bone);
+    opacity: 0.85;
+    margin: 1.6em 0 0.4em;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7em;
+    margin-top: 1.8em;
+  }
+  .cta {
+    display: inline-block;
+    border: 0.12em solid var(--pumpkin);
+    color: var(--pumpkin);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85em;
+    padding: 0.55em 1.1em;
+    border-radius: 2em;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .cta:hover { background: var(--pumpkin); color: var(--midnight); }
+  .cta.solid { background: var(--pumpkin); color: var(--midnight); }
+  .cta.solid:hover { background: #f0a55a; }
+
+  @media (max-width: 380px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<div class="page">
+  <a class="back" href="../../index.html">&#8592; Drinking Buddies Zine</a>
+
+  <p class="eyebrow">Past Event &middot; October 9, 2025 &middot; Our First Ever</p>
+  <h1>Potions &amp; Paws</h1>
+  <p class="subtitle">Drinking Buddies &times; Pearl Diver &times; Pawster</p>
+
+  <div class="stats">
+    <div class="stat"><span class="num">50</span><span class="label">guests</span></div>
+    <div class="stat"><span class="num">15</span><span class="label">dogs</span></div>
+    <div class="stat"><span class="num">$1,000</span><span class="label">raised</span></div>
+    <div class="stat"><span class="num">1st</span><span class="label">ever event</span></div>
+  </div>
+
+  <div class="rule"><span>&#128123;</span></div>
+
+  <h2>How It Came Together</h2>
+  <p>This was the very first event Drinking Buddies ever threw: a Halloween-themed cocktail night at Pearl Diver, costumes encouraged for humans and dogs alike, benefiting <strong>Pawster</strong>, a local Nashville nonprofit.</p>
+  <p>Pawster is more than a one-off partner. Every single copy of Drinking Buddies has a QR code on the back linking to portraits and stories of dogs Pawster supports, often through service workers going through addiction treatment. That connection between hospitality and recovery runs close to home for us, and Potions &amp; Paws was our way of putting real money behind it.</p>
+  <p>Three brand-sponsored cocktails ran the menu that night, the turnout was around 50 people and 15 dogs for a first-ever event, and the outreach it generated made it clear this was worth doing again.</p>
+
+  <div class="check-callout">
+    <img src="check.jpg" alt="Doric Lodge presenting a $1,000 check to Pawster at Potions and Paws">
+    <p>$1,000 raised for Pawster</p>
+    <small>Presented by Doric Lodge 732 F&amp;AM, October 9, 2025</small>
+  </div>
+
+  <div class="rule"><span>&#127875;</span></div>
+
+  <h2>The Night</h2>
+  <div class="gallery">
+    <img src="photo-01.jpg" alt="Guest holding her dog in a costume at Potions and Paws">
+    <img src="photo-02.jpg" alt="Guest with his dog wearing a rainbow hat">
+    <img src="photo-03.jpg" alt="Guest in a Pawster Nashville shirt with his dog">
+    <img src="photo-04.jpg" alt="Raffle prize table with a copy of Drinking Buddies zine">
+    <img src="photo-05.jpg" alt="A group of dogs in Halloween costumes">
+    <img src="photo-06.jpg" alt="Bartenders in cat and dog face paint behind the bar">
+  </div>
+
+  <h2>The Menu</h2>
+  <p style="text-align:center;">Three potion-themed cocktails, each built around a sponsor brand.</p>
+  <div class="cocktails">
+    <div class="cocktail-card">
+      <img src="cocktail-bone-voyage.jpg" alt="Bone Voyage cocktail card featuring Trovador Rum">
+      <div class="credit">Bone Voyage &middot; Trovador Rum</div>
+    </div>
+    <div class="cocktail-card">
+      <img src="cocktail-lady-lagoony.jpg" alt="Lady Lagoony's Blue Moony cocktail card featuring Trovador Rum">
+      <div class="credit">Lady Lagoony's Blue Moony &middot; Trovador Rum</div>
+    </div>
+    <div class="cocktail-card">
+      <img src="cocktail-cauldron-crisp.jpg" alt="Cauldron Crisp cocktail card featuring Engine Gin">
+      <div class="credit">Cauldron Crisp &middot; Engine Gin</div>
+    </div>
+  </div>
+
+  <p class="partners">With <strong>Pearl Diver</strong>, <strong>Trovador Rum</strong>, <strong>Engine Gin</strong>, and <strong>Pawster</strong></p>
+
+  <div class="rule"><span>&#128123;</span></div>
+
+  <p style="text-align:center; font-style: italic;">Want to see your brand behind something like this?</p>
+  <div class="cta-row">
+    <a class="cta solid" href="../../index.html#get-involved">Get Involved</a>
+    <a class="cta" href="../../index.html">Back to Drinking Buddies Zine</a>
+  </div>
+</div>
