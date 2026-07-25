@@ -776,7 +776,7 @@
   </div>
   <div class="link-row">
     <button class="link-chip" id="aboutBtn" type="button">ABOUT THE AUTHOR</button>
-    <span class="link-chip soon" aria-disabled="true">EVENTS <span class="soon-badge">(soon)</span></span>
+    <button class="link-chip" id="eventsBtn" type="button">EVENTS</button>
     <a class="link-chip" href="https://square.link/u/VrNoKWtz" target="_blank" rel="noopener">KEEP THE LIGHTS ON</a>
   </div>
 
@@ -963,6 +963,33 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="eventsModal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="eventsTitle">
+    <button class="modal-close" id="eventsClose" type="button" aria-label="Close">&#10005;</button>
+    <div class="author-jump">
+      <div class="cap"></div>
+      <div class="hair"></div>
+      <div class="head"></div>
+      <div class="arm arm-l"></div>
+      <div class="arm arm-r"></div>
+      <div class="torso"></div>
+      <div class="leg leg-l"></div>
+      <div class="leg leg-r"></div>
+    </div>
+    <h3 id="eventsTitle">EVENTS</h3>
+    <p>
+      <span class="section-title">Hot Takes Night</span>
+      Apply to judge. First Sunday of every month, 6:30pm.
+    </p>
+    <a class="link-chip email-link" href="https://forms.gle/8k4Mf87FwG5q55rp7" target="_blank" rel="noopener">APPLY TO JUDGE &#8594;</a>
+    <p style="margin-top: 1.4em;">
+      <span class="section-title">Drinking Buddies x The Table</span>
+      Pop-up night, July 28th. Two Nashville zines, one gallery night.
+    </p>
+    <a class="link-chip email-link" href="table-popup.html" target="_blank" rel="noopener">VIEW EVENT PAGE &#8594;</a>
+  </div>
+</div>
+
 <script>
   const entry = document.getElementById('entry');
   const cta = document.getElementById('cta');
@@ -1005,6 +1032,7 @@
 
   setupModal('involvedModal', 'getInvolvedBtn', 'involvedClose');
   setupModal('aboutModal', 'aboutBtn', 'aboutClose');
+  setupModal('eventsModal', 'eventsBtn', 'eventsClose');
 
   const partyBtn = document.getElementById('partyBtn');
   let partyTimeout = null;
