@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "drinking-buddies-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8935", "--directory", "/Users/ahli/drinking-buddies-map"],
+      "port": 8935
+    }
+  ]
+}
