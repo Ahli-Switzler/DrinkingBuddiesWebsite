@@ -146,6 +146,48 @@
   .sp3 { top: 0.3em; right: 1.3em; font-size: 0.6em; animation-delay: 1s; }
   .sp4 { bottom: 0.2em; right: 2.6em; animation-delay: 1.5s; }
 
+  .star-burst {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .star-burst .burst-flash {
+    position: absolute;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background: var(--amber);
+    opacity: 0;
+    filter: blur(0.3em);
+  }
+  .star-burst .burst-star {
+    position: absolute;
+    color: var(--amber);
+    font-size: 1.8em;
+    text-shadow: 0 0 0.4em rgba(255,207,63,0.9);
+    opacity: 0;
+  }
+  .star-burst.active .burst-flash {
+    animation: burst-flash 0.5s ease-out forwards;
+  }
+  .star-burst.active .burst-star {
+    animation: burst-out 0.5s ease-out forwards;
+  }
+  @keyframes burst-flash {
+    0% { opacity: 0; transform: scale(0.2); }
+    35% { opacity: 0.9; transform: scale(1); }
+    100% { opacity: 0; transform: scale(2.6); }
+  }
+  @keyframes burst-out {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+    25% { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(200deg); }
+  }
+
   .cta {
     position: relative;
     z-index: 3;
@@ -737,7 +779,8 @@
     .star, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow, .author-jump,
     body.party .glass, body.party .sprite, body.party .sprite .arm-l, body.party .sprite .arm-r,
     body.party .sprite .leg-l, body.party .sprite .leg-r, body.party .disco, body.party .lights span,
-    body.party.chasing #bouncerGuy, body.party.chasing #tossedGuy {
+    body.party.chasing #bouncerGuy, body.party.chasing #tossedGuy,
+    .star-burst .burst-star, .star-burst .burst-flash {
       animation: none !important;
     }
   }
@@ -778,7 +821,7 @@
     <a class="link-chip" href="https://square.link/u/VrNoKWtz" target="_blank" rel="noopener">KEEP THE LIGHTS ON</a>
   </div>
   <div class="link-row">
-    <a class="link-chip" href="submissions.html">CALL FOR SUBMISSIONS</a>
+    <a class="link-chip" href="submissions.html" id="submissionsBtn">CALL FOR SUBMISSIONS</a>
   </div>
 
   <div class="frame">
@@ -1002,6 +1045,18 @@
   </div>
 </div>
 
+<div class="star-burst" id="starBurst" aria-hidden="true">
+  <span class="burst-flash"></span>
+  <span class="burst-star" style="--tx: 0em; --ty: -3.2em;">&#10022;</span>
+  <span class="burst-star" style="--tx: 2.7em; --ty: -1.9em; animation-delay: 0.03s;">&#10022;</span>
+  <span class="burst-star" style="--tx: 3.2em; --ty: 0em; animation-delay: 0.06s;">&#10022;</span>
+  <span class="burst-star" style="--tx: 2.7em; --ty: 1.9em; animation-delay: 0.09s;">&#10022;</span>
+  <span class="burst-star" style="--tx: 0em; --ty: 3.2em; animation-delay: 0.02s;">&#10022;</span>
+  <span class="burst-star" style="--tx: -2.7em; --ty: 1.9em; animation-delay: 0.05s;">&#10022;</span>
+  <span class="burst-star" style="--tx: -3.2em; --ty: 0em; animation-delay: 0.08s;">&#10022;</span>
+  <span class="burst-star" style="--tx: -2.7em; --ty: -1.9em; animation-delay: 0.04s;">&#10022;</span>
+</div>
+
 <script>
   const entry = document.getElementById('entry');
   const cta = document.getElementById('cta');
@@ -1045,6 +1100,18 @@
   setupModal('involvedModal', 'getInvolvedBtn', 'involvedClose');
   setupModal('aboutModal', 'aboutBtn', 'aboutClose');
   setupModal('eventsModal', 'eventsBtn', 'eventsClose');
+
+  const submissionsBtn = document.getElementById('submissionsBtn');
+  const starBurst = document.getElementById('starBurst');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  submissionsBtn.addEventListener('click', (e) => {
+    const href = submissionsBtn.getAttribute('href');
+    if (reduceMotion.matches) return;
+    e.preventDefault();
+    starBurst.classList.add('active');
+    setTimeout(() => { window.location.href = href; }, 480);
+  });
 
   if (location.hash === '#get-involved') {
     document.getElementById('getInvolvedBtn').click();
