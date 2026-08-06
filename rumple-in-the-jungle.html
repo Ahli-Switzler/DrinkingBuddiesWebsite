@@ -1,0 +1,498 @@
+<meta charset="utf-8">
+<title>Rumple in the Jungle: Bar Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0908;
+    --red: #c8102e;
+    --red-deep: #8a0a1f;
+    --gold: #c9a24b;
+    --gold-deep: #8a6a1f;
+    --cream: #f2e6c9;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--black);
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(200,16,46,0.18), transparent 60%);
+    color: var(--cream);
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2.2em 1.1em 5em;
+  }
+
+  .page { width: 100%; max-width: 32em; }
+
+  a.back {
+    display: inline-block;
+    color: var(--black);
+    background: var(--gold);
+    border: 0.14em solid var(--gold);
+    border-radius: 2em;
+    padding: 0.4em 0.9em;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.8em;
+  }
+  a.back:hover { background: #ddc077; }
+
+  .hero { text-align: center; }
+
+  .hero-title {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin: 0;
+    font-size: clamp(2.1em, 9vw + 0.6em, 3.6em);
+    letter-spacing: 0.01em;
+    color: var(--red);
+    -webkit-text-stroke: 0.03em var(--black);
+    text-shadow:
+      0.05em 0.05em 0 var(--black),
+      0 0 0.5em rgba(200,16,46,0.5);
+  }
+
+  .subhead {
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--red);
+    font-size: clamp(1em, 2.5vw + 0.6em, 1.3em);
+    letter-spacing: 0.06em;
+    margin: 0.5em 0 0.1em;
+  }
+  .subhead2 {
+    font-weight: 700;
+    font-size: 0.85em;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    text-transform: uppercase;
+    margin: 0 0 1.4em;
+  }
+
+  .crest-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin: 1.2em 0;
+    color: var(--gold);
+  }
+  .crest-divider::before,
+  .crest-divider::after {
+    content: "";
+    flex: 1;
+    height: 0.1em;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .crest-divider span {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    font-size: 0.9em;
+    white-space: nowrap;
+  }
+
+  .fight-card {
+    background: linear-gradient(180deg, #16110d, #0e0b09);
+    border: 0.14em solid var(--gold-deep);
+    border-radius: 0.5em;
+    padding: 1.4em 1.3em;
+    text-align: center;
+    box-shadow: 0 0.3em 1em rgba(0,0,0,0.5);
+  }
+  .fight-card .smackdown {
+    font-family: 'Anton', sans-serif;
+    color: var(--red);
+    font-size: 1.15em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.6em;
+  }
+  .fight-card .matchup {
+    font-family: 'Anton', sans-serif;
+    color: var(--gold);
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .fight-card .details {
+    margin-top: 0.8em;
+    font-size: 0.9em;
+    line-height: 1.8;
+  }
+  .fight-card .details strong { color: var(--red); }
+
+  .submit-card {
+    margin: 2.2em auto 0;
+    background: var(--cream);
+    color: var(--black);
+    border: 0.2em solid var(--gold-deep);
+    border-radius: 0.6em;
+    box-shadow: 0.3em 0.3em 0 rgba(0,0,0,0.6);
+    padding: 1.7em 1.4em 1.9em;
+  }
+  .submit-card h2 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1.4em;
+    margin: 0 0 0.3em;
+    text-align: center;
+    color: var(--red-deep);
+  }
+  .submit-note {
+    font-size: 0.85em;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0 0 1.4em;
+  }
+
+  .thanks-banner p {
+    font-weight: 700;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+  }
+
+  .thanks-clash {
+    position: relative;
+    height: 4.4em;
+    max-width: 13em;
+    margin: 0 auto 0.4em;
+  }
+  .mini-glove {
+    position: absolute;
+    top: 0;
+    width: 4.4em;
+  }
+  .mini-glove-left {
+    left: 0;
+    transform: translateX(-2.6em) rotate(-15deg);
+    animation: closeLeft 0.5s ease-out 0.05s forwards;
+  }
+  .mini-glove-right {
+    right: 0;
+    transform: translateX(2.6em) rotate(15deg) scaleX(-1);
+    animation: closeRight 0.5s ease-out 0.05s forwards;
+  }
+  @keyframes closeLeft { to { transform: translateX(1.7em) rotate(-8deg); } }
+  @keyframes closeRight { to { transform: translateX(-1.7em) rotate(8deg) scaleX(-1); } }
+
+  .thanks-banner p.thanks-title {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    color: var(--red-deep);
+    font-size: 1.15em;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.8em;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.45s forwards;
+  }
+
+  .submit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+  }
+  .submit-form label {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.4em;
+  }
+  .submit-form .hint {
+    display: block;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 0.9em;
+    opacity: 0.7;
+    margin-top: 0.2em;
+  }
+  .submit-form select,
+  .submit-form textarea,
+  .submit-form input[type="text"],
+  .submit-form input[type="tel"] {
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95em;
+    background: white;
+    color: var(--black);
+    border: 0.14em solid var(--black);
+    border-radius: 0.35em;
+    padding: 0.6em 0.7em;
+  }
+  .submit-form textarea { min-height: 5em; resize: vertical; }
+  .submit-form .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .submit-form button {
+    appearance: none;
+    align-self: center;
+    background: var(--red);
+    color: var(--cream);
+    border: 0.16em solid var(--red-deep);
+    border-radius: 2em;
+    padding: 0.7em 2em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0.14em 0.14em 0 rgba(0,0,0,0.5);
+    margin-top: 0.4em;
+  }
+  .submit-form button:hover { background: var(--red-deep); }
+  .submit-form button:active { transform: translate(0.05em, 0.05em); box-shadow: 0.04em 0.04em 0 rgba(0,0,0,0.5); }
+
+  .footnote {
+    margin: 1.8em auto 0;
+    font-size: 0.8em;
+    line-height: 1.7;
+    text-align: center;
+    opacity: 0.9;
+  }
+  .footnote a { color: var(--gold); }
+
+  .presented-by {
+    text-align: center;
+    margin-top: 2.2em;
+    font-size: 0.75em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: introOut 0.35s ease 0.9s forwards;
+  }
+  .intro-title {
+    position: absolute;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 0.95;
+    color: var(--red);
+    font-size: clamp(2.1em, 9vw + 0.6em, 3.6em);
+    opacity: 0;
+    animation: titleFlash 0.3s ease 0.5s forwards;
+  }
+  .glove {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 42vw;
+    max-width: 230px;
+  }
+  .glove-left {
+    transform: translate(-50%, -50%) translateX(-140vw) rotate(-15deg);
+    animation: punchLeft 0.5s ease-out 0.1s forwards;
+  }
+  .glove-right {
+    transform: translate(-50%, -50%) translateX(140vw) rotate(15deg) scaleX(-1);
+    animation: punchRight 0.5s ease-out 0.1s forwards;
+  }
+  @keyframes punchLeft {
+    to { transform: translate(-50%, -50%) translateX(-14vw) rotate(-8deg); }
+  }
+  @keyframes punchRight {
+    to { transform: translate(-50%, -50%) translateX(14vw) rotate(8deg) scaleX(-1); }
+  }
+  @keyframes titleFlash {
+    0% { opacity: 0; transform: scale(0.85); }
+    60% { opacity: 1; transform: scale(1.06); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes introOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(1.2em); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .page > * {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .page > a.back { animation-delay: 1.05s; }
+  .page > .hero { animation-delay: 1.15s; }
+  .page > .crest-divider { animation-delay: 1.35s; }
+  .page > .submit-card { animation-delay: 1.5s; }
+  .page > .footnote { animation-delay: 1.7s; }
+  .page > .presented-by { animation-delay: 1.85s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-overlay { display: none; }
+    .page > * { animation: none; opacity: 1; }
+  }
+</style>
+
+<div class="intro-overlay" aria-hidden="true">
+  <svg class="glove glove-left" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="30" width="44" height="42" rx="15" fill="#0a0908"/>
+    <rect x="5" y="35" width="34" height="5" rx="2.5" fill="rgba(255,255,255,0.1)"/>
+    <circle cx="46" cy="26" r="15" fill="#c8102e" stroke="#0a0908" stroke-width="4"/>
+    <ellipse cx="74" cy="50" rx="40" ry="34" fill="#c8102e" stroke="#0a0908" stroke-width="5"/>
+    <path d="M50 52 Q74 42 98 52" stroke="#7a0a1c" stroke-width="3" fill="none" opacity="0.65" stroke-linecap="round"/>
+    <ellipse cx="60" cy="34" rx="13" ry="7" fill="rgba(255,255,255,0.2)"/>
+  </svg>
+  <h2 class="intro-title">Rumple in<br>the Jungle</h2>
+  <svg class="glove glove-right" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="30" width="44" height="42" rx="15" fill="#0a0908"/>
+    <rect x="5" y="35" width="34" height="5" rx="2.5" fill="rgba(255,255,255,0.1)"/>
+    <circle cx="46" cy="26" r="15" fill="#c8102e" stroke="#0a0908" stroke-width="4"/>
+    <ellipse cx="74" cy="50" rx="40" ry="34" fill="#c8102e" stroke="#0a0908" stroke-width="5"/>
+    <path d="M50 52 Q74 42 98 52" stroke="#7a0a1c" stroke-width="3" fill="none" opacity="0.65" stroke-linecap="round"/>
+    <ellipse cx="60" cy="34" rx="13" ry="7" fill="rgba(255,255,255,0.2)"/>
+  </svg>
+</div>
+
+<div class="page">
+  <a class="back" href="index.html">&#8592; Drinking Buddies Zine</a>
+
+  <header class="hero">
+    <h1 class="hero-title">Rumple in<br>the Jungle</h1>
+    <p class="subhead">Neighborhood Cocktail Brawl</p>
+    <p class="subhead2">Bar vs. Bar. Round for Round. Winner Take All.</p>
+
+    <div class="fight-card">
+      <p class="matchup">Love's Alibi &middot; September 14</p>
+      <p class="details">
+        <strong>Bartender call time:</strong> 6:00 PM<br>
+        <strong>Event runs:</strong> 8:00 PM to 10 PM+
+      </p>
+    </div>
+  </header>
+
+  <div class="crest-divider"><span>Register Your Bar</span></div>
+
+  <section class="submit-card">
+    <h2>Sign Up to Compete</h2>
+
+    <div class="thanks-banner" id="thanksBanner" hidden>
+      <div class="thanks-clash">
+        <svg class="mini-glove mini-glove-left" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="30" width="44" height="42" rx="15" fill="#0a0908"/>
+          <rect x="5" y="35" width="34" height="5" rx="2.5" fill="rgba(255,255,255,0.1)"/>
+          <circle cx="46" cy="26" r="15" fill="#c8102e" stroke="#0a0908" stroke-width="4"/>
+          <ellipse cx="74" cy="50" rx="40" ry="34" fill="#c8102e" stroke="#0a0908" stroke-width="5"/>
+          <path d="M50 52 Q74 42 98 52" stroke="#7a0a1c" stroke-width="3" fill="none" opacity="0.65" stroke-linecap="round"/>
+          <ellipse cx="60" cy="34" rx="13" ry="7" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+        <svg class="mini-glove mini-glove-right" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="30" width="44" height="42" rx="15" fill="#0a0908"/>
+          <rect x="5" y="35" width="34" height="5" rx="2.5" fill="rgba(255,255,255,0.1)"/>
+          <circle cx="46" cy="26" r="15" fill="#c8102e" stroke="#0a0908" stroke-width="4"/>
+          <ellipse cx="74" cy="50" rx="40" ry="34" fill="#c8102e" stroke="#0a0908" stroke-width="5"/>
+          <path d="M50 52 Q74 42 98 52" stroke="#7a0a1c" stroke-width="3" fill="none" opacity="0.65" stroke-linecap="round"/>
+          <ellipse cx="60" cy="34" rx="13" ry="7" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+      </div>
+
+      <p class="thanks-title">See You at the Rumple of a Lifetime</p>
+
+      <p>You're in the bracket. We'll follow up with your bout details and run of show soon.</p>
+    </div>
+
+    <div id="formArea">
+      <p class="submit-note">
+        Fill this out and we'll get you locked into the fight card. Questions in the meantime, hit us up.
+      </p>
+
+      <form class="submit-form" action="https://formspree.io/f/moeaveog" method="POST">
+        <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="Rumple in the Jungle: New Bar Registration">
+        <input type="hidden" name="_next" value="https://ahli-switzler.github.io/DrinkingBuddiesWebsite/rumple-in-the-jungle.html?sent=1">
+
+        <div>
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="Name" required>
+        </div>
+
+        <div>
+          <label for="bar">Bar You're Representing</label>
+          <input type="text" id="bar" name="Bar" required>
+        </div>
+
+        <div>
+          <label for="lightColor">Corner Light Color
+            <span class="hint">What color should we light your corner?</span>
+          </label>
+          <input type="text" id="lightColor" name="Light Color" required>
+        </div>
+
+        <div>
+          <label for="walkout">Walkout Song</label>
+          <input type="text" id="walkout" name="Walkout Song" required>
+        </div>
+
+        <div>
+          <label for="fighterName">Fighter Name
+            <span class="hint">What should the announcer call you?</span>
+          </label>
+          <input type="text" id="fighterName" name="Fighter Name" required>
+        </div>
+
+        <div>
+          <label for="stats">Fun Stats for the Announcer
+            <span class="hint">Optional. Anything wild, funny, or impressive we can hype you up with ringside.</span>
+          </label>
+          <textarea id="stats" name="Fun Stats"></textarea>
+        </div>
+
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="Phone" required>
+        </div>
+
+        <div>
+          <label for="instagram">Instagram Handle</label>
+          <input type="text" id="instagram" name="Instagram" required>
+        </div>
+
+        <div>
+          <label for="needs">Anything You Need From Us?
+            <span class="hint">Optional. Ask away.</span>
+          </label>
+          <textarea id="needs" name="Needs"></textarea>
+        </div>
+
+        <p class="submit-note">
+          We'll send the full competition outline after you register, then again two weeks out. We'll also be announcing the competition in the coming weeks, so keep an eye on DrinkingBuddiesZine and Love's Alibi's Instagram.
+        </p>
+
+        <button type="submit">Let's Get Ready to Rumple</button>
+      </form>
+    </div>
+  </section>
+
+  <p class="footnote">
+    Questions? DM us on Instagram <a href="https://www.instagram.com/drinkingbuddieszine" target="_blank" rel="noopener">@DrinkingBuddiesZine</a>
+    or email <a href="mailto:drinkingbuddyzine@gmail.com">drinkingbuddyzine@gmail.com</a>.
+  </p>
+
+  <p class="presented-by">Presented by Rumplemintz &times; Love's Alibi &times; Drinking Buddies Zine</p>
+</div>
+
+<script>
+  if (new URLSearchParams(location.search).get('sent') === '1') {
+    document.getElementById('thanksBanner').hidden = false;
+    document.getElementById('formArea').hidden = true;
+  }
+</script>
