@@ -157,35 +157,38 @@
   }
   .star-burst .burst-flash {
     position: absolute;
-    width: 3em;
-    height: 3em;
+    top: 50%;
+    left: 50%;
+    width: 160vmax;
+    height: 160vmax;
+    margin: -80vmax 0 0 -80vmax;
     border-radius: 50%;
-    background: var(--amber);
+    background: radial-gradient(circle, var(--amber) 0%, rgba(255,207,63,0.55) 35%, rgba(45,19,96,0) 70%);
     opacity: 0;
-    filter: blur(0.3em);
+    transform: scale(0);
   }
   .star-burst .burst-star {
     position: absolute;
     color: var(--amber);
-    font-size: 1.8em;
-    text-shadow: 0 0 0.4em rgba(255,207,63,0.9);
+    font-size: clamp(2em, 6vw, 4em);
+    text-shadow: 0 0 0.5em rgba(255,207,63,0.9);
     opacity: 0;
   }
   .star-burst.active .burst-flash {
-    animation: burst-flash 0.5s ease-out forwards;
+    animation: burst-flash 0.6s ease-out forwards;
   }
   .star-burst.active .burst-star {
-    animation: burst-out 0.5s ease-out forwards;
+    animation: burst-out 0.6s ease-out forwards;
   }
   @keyframes burst-flash {
-    0% { opacity: 0; transform: scale(0.2); }
-    35% { opacity: 0.9; transform: scale(1); }
-    100% { opacity: 0; transform: scale(2.6); }
+    0% { opacity: 0; transform: scale(0); }
+    40% { opacity: 0.95; transform: scale(0.5); }
+    100% { opacity: 0; transform: scale(1); }
   }
   @keyframes burst-out {
     0% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
     25% { opacity: 1; }
-    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(200deg); }
+    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.6) rotate(200deg); }
   }
 
   .cta {
@@ -1047,14 +1050,14 @@
 
 <div class="star-burst" id="starBurst" aria-hidden="true">
   <span class="burst-flash"></span>
-  <span class="burst-star" style="--tx: 0em; --ty: -3.2em;">&#10022;</span>
-  <span class="burst-star" style="--tx: 2.7em; --ty: -1.9em; animation-delay: 0.03s;">&#10022;</span>
-  <span class="burst-star" style="--tx: 3.2em; --ty: 0em; animation-delay: 0.06s;">&#10022;</span>
-  <span class="burst-star" style="--tx: 2.7em; --ty: 1.9em; animation-delay: 0.09s;">&#10022;</span>
-  <span class="burst-star" style="--tx: 0em; --ty: 3.2em; animation-delay: 0.02s;">&#10022;</span>
-  <span class="burst-star" style="--tx: -2.7em; --ty: 1.9em; animation-delay: 0.05s;">&#10022;</span>
-  <span class="burst-star" style="--tx: -3.2em; --ty: 0em; animation-delay: 0.08s;">&#10022;</span>
-  <span class="burst-star" style="--tx: -2.7em; --ty: -1.9em; animation-delay: 0.04s;">&#10022;</span>
+  <span class="burst-star" style="--tx: 0vmin; --ty: -42vmin;">&#10022;</span>
+  <span class="burst-star" style="--tx: 30vmin; --ty: -30vmin; animation-delay: 0.03s;">&#10022;</span>
+  <span class="burst-star" style="--tx: 42vmin; --ty: 0vmin; animation-delay: 0.06s;">&#10022;</span>
+  <span class="burst-star" style="--tx: 30vmin; --ty: 30vmin; animation-delay: 0.09s;">&#10022;</span>
+  <span class="burst-star" style="--tx: 0vmin; --ty: 42vmin; animation-delay: 0.02s;">&#10022;</span>
+  <span class="burst-star" style="--tx: -30vmin; --ty: 30vmin; animation-delay: 0.05s;">&#10022;</span>
+  <span class="burst-star" style="--tx: -42vmin; --ty: 0vmin; animation-delay: 0.08s;">&#10022;</span>
+  <span class="burst-star" style="--tx: -30vmin; --ty: -30vmin; animation-delay: 0.04s;">&#10022;</span>
 </div>
 
 <script>
@@ -1110,7 +1113,7 @@
     if (reduceMotion.matches) return;
     e.preventDefault();
     starBurst.classList.add('active');
-    setTimeout(() => { window.location.href = href; }, 480);
+    setTimeout(() => { window.location.href = href; }, 560);
   });
 
   if (location.hash === '#get-involved') {
