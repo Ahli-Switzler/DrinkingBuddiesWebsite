@@ -11,8 +11,7 @@
 
   :root {
     --ink: #170f28;
-    --dusk: #2f1360;
-    --dusk-glow: #4d2a8f;
+    --dusk: #ffffff;
     --cream: #f7ecd8;
     --pink: #ffa8d6;
     --cyan: #96e8de;
@@ -22,6 +21,10 @@
     --plum-room: #c0aeed;
     --bar-room: #a6e6d6;
     --kitchen-room: #f4ddb4;
+    --leaf-1: #c8501c;
+    --leaf-2: #b5451b;
+    --leaf-3: #e0a52e;
+    --leaf-4: #8a5a2b;
     --font-display: 'Press Start 2P', 'DejaVu Sans Mono', monospace;
     --font-mono: 'DejaVu Sans Mono', 'SFMono-Regular', Consolas, monospace;
   }
@@ -33,11 +36,10 @@
     min-height: 100vh;
     background-color: var(--dusk);
     background-image:
-      linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px),
-      radial-gradient(ellipse 120% 60% at 50% 0%, var(--dusk-glow) 0%, transparent 65%);
-    background-size: clamp(22px, 3.6vw, 42px) clamp(22px, 3.6vw, 42px), clamp(22px, 3.6vw, 42px) clamp(22px, 3.6vw, 42px), 100% 100%;
-    color: var(--cream);
+      linear-gradient(rgba(23,15,40,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(23,15,40,0.06) 1px, transparent 1px);
+    background-size: clamp(22px, 3.6vw, 42px) clamp(22px, 3.6vw, 42px);
+    color: var(--ink);
     font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
     overflow-x: hidden;
     display: flex;
@@ -55,6 +57,7 @@
   }
 
   .star {
+    display: none;
     position: absolute;
     width: 3px;
     height: 3px;
@@ -68,16 +71,86 @@
     50% { opacity: 1; }
   }
 
-  .moon {
+  .sun {
     position: absolute;
     top: 6%;
     right: 10%;
     width: 54px;
     height: 54px;
-    background: var(--cream);
+    animation: sun-wobble 6s ease-in-out infinite;
+  }
+  @keyframes sun-wobble {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+  }
+  .sun-core {
+    position: absolute;
+    inset: 0;
     border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff3b0, var(--amber) 72%);
     border: 2px solid var(--ink);
-    box-shadow: -14px 0 0 0 var(--dusk) inset, 0 0 30px 6px rgba(245,234,216,0.35);
+    box-shadow: 0 0 24px 6px rgba(255,207,63,0.5);
+  }
+  .sun-ray {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 13px;
+    background: var(--ink);
+    border-radius: 2px;
+    transform: translate(-50%, -50%) rotate(var(--a)) translateY(-33px);
+  }
+  .sun-eye {
+    position: absolute;
+    top: 42%;
+    width: 3px;
+    height: 5px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .sun-eye.l { left: 33%; }
+  .sun-eye.r { left: 58%; }
+  .sun-smile {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    width: 16px;
+    height: 8px;
+    transform: translateX(-50%);
+    border: 2px solid var(--ink);
+    border-top: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .leaves {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+  }
+
+  .leaf {
+    position: absolute;
+    top: -5%;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    clip-path: polygon(50% 0%, 90% 25%, 100% 60%, 60% 100%, 40% 100%, 0% 60%, 10% 25%);
+    animation: leaf-fall linear infinite;
+  }
+
+  @keyframes leaf-fall {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    8% { opacity: 0.85; }
+    25% { transform: translate(18px, 30vh) rotate(90deg); }
+    50% { transform: translate(-16px, 58vh) rotate(180deg); }
+    75% { transform: translate(14px, 86vh) rotate(270deg); }
+    92% { opacity: 0.85; }
+    100% { transform: translate(-10px, 115vh) rotate(360deg); opacity: 0; }
   }
 
   main.stage {
@@ -156,8 +229,8 @@
     font-family: var(--font-mono);
     font-size: 0.95em;
     line-height: 1.5;
-    color: var(--cream);
-    text-shadow: 0.05em 0.05em 0 rgba(0,0,0,0.35);
+    color: var(--ink);
+    text-shadow: 0.05em 0.05em 0 rgba(255,255,255,0.6);
   }
 
   .star-burst {
@@ -641,7 +714,7 @@
     font-family: var(--font-mono);
     font-size: 0.75em;
     letter-spacing: 0.05em;
-    color: rgba(247,236,216,0.65);
+    color: rgba(23,15,40,0.55);
     text-align: center;
   }
 
@@ -681,7 +754,7 @@
     font-family: var(--font-mono);
     font-size: 0.85em;
     letter-spacing: 0.03em;
-    color: var(--amber);
+    color: var(--leaf-2);
     text-align: center;
   }
   .stats-plaque {
@@ -735,10 +808,10 @@
     line-height: 1.6;
     margin: 0 0 0.6em;
     text-wrap: balance;
-    color: var(--cyan);
+    color: #1f8f7d;
     text-shadow: 0.08em 0.08em 0 var(--ink);
   }
-  .archive-teaser p { font-family: var(--font-mono); color: rgba(247,236,216,0.8); max-width: 34em; margin: 0 auto 1.6em; }
+  .archive-teaser p { font-family: var(--font-mono); color: rgba(23,15,40,0.75); max-width: 34em; margin: 0 auto 1.6em; }
   .issue-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(6.5em, 1fr));
@@ -793,7 +866,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .star, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow, .author-jump,
+    .star, .leaf, .sun, .sprite, .walk, .disco, .lights span, .sign-plank, .cta, .cta .arrow, .author-jump,
     body.party .glass, body.party .sprite, body.party .sprite .arm-l, body.party .sprite .arm-r,
     body.party .sprite .leg-l, body.party .sprite .leg-r, body.party .disco, body.party .lights span,
     body.party.chasing #bouncerGuy, body.party.chasing #tossedGuy,
@@ -814,7 +887,30 @@
   <div class="star" style="top:34%;left:52%;"></div>
   <div class="star" style="top:16%;left:36%;"></div>
   <div class="star" style="top:26%;left:92%;"></div>
-  <div class="moon"></div>
+  <div class="sun">
+    <span class="sun-ray" style="--a:0deg;"></span>
+    <span class="sun-ray" style="--a:45deg;"></span>
+    <span class="sun-ray" style="--a:90deg;"></span>
+    <span class="sun-ray" style="--a:135deg;"></span>
+    <span class="sun-ray" style="--a:180deg;"></span>
+    <span class="sun-ray" style="--a:225deg;"></span>
+    <span class="sun-ray" style="--a:270deg;"></span>
+    <span class="sun-ray" style="--a:315deg;"></span>
+    <div class="sun-core"></div>
+    <span class="sun-eye l"></span>
+    <span class="sun-eye r"></span>
+    <span class="sun-smile"></span>
+  </div>
+</div>
+
+<div class="leaves">
+  <div class="leaf" style="left:6%; background:var(--leaf-1); animation-duration:13s; animation-delay:0s;"></div>
+  <div class="leaf" style="left:18%; background:var(--leaf-3); animation-duration:15s; animation-delay:4s;"></div>
+  <div class="leaf" style="left:32%; background:var(--leaf-2); animation-duration:12s; animation-delay:8s;"></div>
+  <div class="leaf" style="left:48%; background:var(--leaf-4); animation-duration:16s; animation-delay:2s;"></div>
+  <div class="leaf" style="left:63%; background:var(--leaf-1); animation-duration:14s; animation-delay:10s;"></div>
+  <div class="leaf" style="left:77%; background:var(--leaf-3); animation-duration:13s; animation-delay:6s;"></div>
+  <div class="leaf" style="left:90%; background:var(--leaf-2); animation-duration:15s; animation-delay:12s;"></div>
 </div>
 
 <main class="stage">
@@ -828,7 +924,7 @@
     <span class="sparkle sp4">&#10022;</span>
   </div>
 
-  <p class="why-statement">With every zine and event Drinking Buddies wants the service industry to feel celebrated, seen, and have a community and network around them to get them the resources they need.</p>
+  <p class="why-statement">With every zine and event, Drinking Buddies celebrates the service industry and builds the network to get them the resources they need.</p>
 
   <div class="link-row">
     <button class="link-chip" id="getInvolvedBtn" type="button">GET INVOLVED</button>
@@ -934,8 +1030,8 @@
   <p class="stats-eyebrow">&#10022; OUT IN THE WILD RIGHT NOW &#10022;</p>
   <div class="stats-plaque">
     <div class="stat">
-      <span class="num">15/17</span>
-      <span class="label">MINI BARS ACTIVE (2 IN REPAIR)</span>
+      <span class="num">19/20</span>
+      <span class="label">MINI BARS ACTIVE (1 IN REPAIR)</span>
     </div>
     <div class="stat">
       <span class="num">1,540+</span>
