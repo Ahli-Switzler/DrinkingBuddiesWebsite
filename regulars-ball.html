@@ -1,0 +1,560 @@
+<meta charset="utf-8">
+<title>The Regulars' Ball: Bartender Sign Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2e3d3;
+    --paper-light: #f9f1e8;
+    --ink: #141110;
+    --ink-soft: #4a403b;
+    --red: #c8102e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--paper-light);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.08em;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2.2em 1.1em 5em;
+  }
+
+  .page { width: 100%; max-width: 32em; }
+
+  a.back {
+    display: inline-block;
+    color: var(--paper-light);
+    background: var(--ink);
+    border-radius: 2em;
+    padding: 0.45em 1.05em;
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.8em;
+  }
+  a.back:hover { background: var(--ink-soft); }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .flyer {
+    display: block;
+    width: 100%;
+    max-width: 24em;
+    height: auto;
+    margin: 0 auto;
+    border: 0.08em solid var(--ink);
+    box-shadow: 0.3em 0.3em 0 var(--ink);
+  }
+
+  .rules {
+    margin: 2.4em 0 0;
+    line-height: 1.55;
+  }
+  .rules h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.95em;
+    margin: 1.3em 0 0.2em;
+  }
+  .rules p { margin: 0; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    margin: 2.2em 0 1.3em;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 0.06em;
+    background: var(--ink);
+  }
+  .divider span {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.35em;
+    white-space: nowrap;
+  }
+
+  .submit-card {
+    background: #ffffff;
+    border: 0.08em solid var(--ink);
+    box-shadow: 0.3em 0.3em 0 var(--ink);
+    padding: 1.8em 1.4em 2em;
+  }
+  .submit-card h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 1.6em;
+    margin: 0 0 0.4em;
+    text-align: center;
+  }
+  .submit-note {
+    font-style: italic;
+    font-size: 0.98em;
+    line-height: 1.55;
+    text-align: center;
+    margin: 0 0 1.4em;
+  }
+
+  .submit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+  }
+  .submit-form fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+  }
+  .submit-form legend {
+    width: 100%;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.6em;
+    border-bottom: 0.04em solid var(--ink);
+    padding-bottom: 0.1em;
+    margin: 0.6em 0 0.2em;
+  }
+  .submit-form .legend-note {
+    font-style: italic;
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin: -0.4em 0 0;
+    color: var(--ink-soft);
+  }
+  .submit-form label {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.88em;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35em;
+  }
+  .submit-form .hint {
+    display: block;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1.05em;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 0.1em;
+  }
+  .submit-form textarea,
+  .submit-form input[type="text"],
+  .submit-form input[type="tel"],
+  .submit-form input[type="email"] {
+    width: 100%;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.05em;
+    background: var(--paper-light);
+    color: var(--ink);
+    border: 0.08em solid var(--ink);
+    border-radius: 0;
+    padding: 0.5em 0.65em;
+  }
+  .submit-form textarea { min-height: 5em; resize: vertical; }
+  .submit-form input:focus,
+  .submit-form textarea:focus { outline: 0.12em solid var(--ink); outline-offset: 0.12em; }
+
+  .checks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    background: var(--paper);
+    padding: 0.9em 1em;
+  }
+  .checks p {
+    margin: 0 0 0.1em;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.88em;
+    letter-spacing: 0.08em;
+  }
+  .checks label.check {
+    display: flex;
+    gap: 0.6em;
+    align-items: flex-start;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1em;
+    line-height: 1.4;
+    margin: 0;
+    cursor: pointer;
+  }
+  .checks input[type="checkbox"] {
+    accent-color: var(--ink);
+    width: 1.1em;
+    height: 1.1em;
+    margin-top: 0.15em;
+    flex-shrink: 0;
+  }
+
+  .submit-form .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .submit-form button {
+    appearance: none;
+    align-self: center;
+    background: var(--ink);
+    color: var(--paper-light);
+    border: 0;
+    padding: 0.7em 2em;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    margin-top: 0.3em;
+  }
+  .submit-form button:hover { background: var(--ink-soft); }
+  .submit-form button:active { transform: translate(0.05em, 0.05em); }
+
+  .thanks-banner p {
+    line-height: 1.55;
+    margin: 0;
+    text-align: center;
+  }
+  .thanks-banner p.thanks-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.8em;
+    margin: 0 0 0.5em;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.45s forwards;
+  }
+
+  .cheers {
+    position: relative;
+    height: 5em;
+    max-width: 9em;
+    margin: 0 auto 0.6em;
+  }
+  .cheers .coupe {
+    position: absolute;
+    top: 0.6em;
+    width: 3.4em;
+    height: 4.4em;
+  }
+  .cheers .coupe-left {
+    left: 0;
+    transform: translateX(-1.4em) rotate(-4deg);
+    animation: clinkLeft 0.5s ease-out 0.05s forwards;
+  }
+  .cheers .coupe-right {
+    right: 0;
+    transform: translateX(1.4em) rotate(4deg) scaleX(-1);
+    animation: clinkRight 0.5s ease-out 0.05s forwards;
+  }
+  @keyframes clinkLeft { to { transform: translateX(1.3em) rotate(10deg); } }
+  @keyframes clinkRight { to { transform: translateX(-1.3em) rotate(-10deg) scaleX(-1); } }
+
+  .sparkle {
+    position: absolute;
+    left: 50%;
+    top: -0.3em;
+    width: 1.4em;
+    height: 1.4em;
+    transform: translateX(-50%) scale(0);
+    animation: sparkle 0.4s ease-out 0.5s forwards;
+  }
+  @keyframes sparkle { to { transform: translateX(-50%) scale(1); } }
+
+  .footnote {
+    margin: 1.8em auto 0;
+    font-size: 0.95em;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .footnote a { color: var(--ink); }
+
+  .presented-by {
+    text-align: center;
+    margin-top: 2.2em;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.85em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--paper);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: introOut 0.4s ease 1.05s forwards;
+  }
+  .intro-overlay .coupe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26vw;
+    max-width: 140px;
+    height: 34vw;
+    max-height: 182px;
+  }
+  .intro-overlay .coupe-left {
+    transform: translate(-50%, -50%) translateX(-120vw);
+    animation: slideLeft 0.55s ease-out 0.1s forwards;
+  }
+  .intro-overlay .coupe-right {
+    transform: translate(-50%, -50%) translateX(120vw) scaleX(-1);
+    animation: slideRight 0.55s ease-out 0.1s forwards;
+  }
+  @keyframes slideLeft { to { transform: translate(-50%, -50%) translateX(-8vw) rotate(10deg); } }
+  @keyframes slideRight { to { transform: translate(-50%, -50%) translateX(8vw) rotate(-10deg) scaleX(-1); } }
+  .intro-overlay .sparkle {
+    top: 50%;
+    width: 2.6em;
+    height: 2.6em;
+    transform: translate(-50%, -50%) translateY(-5.2em) scale(0);
+    animation: introSparkle 0.35s ease-out 0.62s forwards;
+  }
+  @keyframes introSparkle { to { transform: translate(-50%, -50%) translateY(-5.2em) scale(1); } }
+  @keyframes introOut { to { opacity: 0; visibility: hidden; } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(1.2em); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .page > * {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .page > a.back { animation-delay: 1.15s; }
+  .page > .hero { animation-delay: 1.25s; }
+  .page > .rules { animation-delay: 1.4s; }
+  .page > .divider { animation-delay: 1.5s; }
+  .page > .submit-card { animation-delay: 1.6s; }
+  .page > .footnote { animation-delay: 1.75s; }
+  .page > .presented-by { animation-delay: 1.85s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-overlay { display: none; }
+    .page > * { animation: none; opacity: 1; }
+    .cheers .coupe, .sparkle, .thanks-banner p.thanks-title { animation: none; opacity: 1; }
+  }
+</style>
+
+<!-- Coupe glass and sparkle from the flyer, reused for the intro and the thank-you clink -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="coupe" viewBox="0 0 100 130">
+    <path d="M8 18 Q50 12 92 18 Q90 60 50 64 Q10 60 8 18 Z" fill="#f9f1e8" stroke="#141110" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M12 30 Q50 22 89 28 Q86 58 50 61 Q14 58 12 30 Z" fill="#141110"/>
+    <path d="M48 64 L46 112 M52 64 L54 112" stroke="#141110" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="50" cy="118" rx="26" ry="7" fill="#f9f1e8" stroke="#141110" stroke-width="3.5"/>
+  </symbol>
+  <symbol id="spark" viewBox="0 0 40 40">
+    <path d="M20 2 Q22 18 38 20 Q22 22 20 38 Q18 22 2 20 Q18 18 20 2 Z" fill="none" stroke="#141110" stroke-width="2.2" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<div class="intro-overlay" aria-hidden="true">
+  <svg class="coupe coupe-left"><use href="#coupe"/></svg>
+  <svg class="sparkle"><use href="#spark"/></svg>
+  <svg class="coupe coupe-right"><use href="#coupe"/></svg>
+</div>
+
+<div class="page">
+  <a class="back" href="index.html">&#8592; Drinking Buddies Zine</a>
+
+  <header class="hero">
+    <h1 class="sr-only">The Regulars' Ball</h1>
+    <img class="flyer" src="images/regulars-ball-flyer.jpg" alt="You and your regular are cordially invited to compete: The Regulars' Ball. Monday, November 16, Barrel Proof Nashville, 7 PM. A little competition. A lot of thank you. Two sides of the same bar. Presented by Bacardi and Drinking Buddies.">
+  </header>
+
+  <section class="rules">
+    <p>Let's throw a regular party! The Regulars' Ball is a two round competition at Barrel Proof where a bartender competes alongside a regular they picked themselves as teammates.</p>
+
+    <h3>Round One</h3>
+    <p>An old fashioned, judged entirely by the standard of one person: the regular. Guests taste, guests vote, tokens in jars. The regular is the spec, the room is the jury. Top four pairs advance.</p>
+
+    <h3>Round Two</h3>
+    <p>The bartender puts their hands behind their back and does not touch a thing. The regular does all of it. Every pour, every stir, every garnish, run entirely on the bartender's voice.</p>
+
+    <h3>Round Two Judges</h3>
+    <p>The regulars who don't make it past round one get entered into a raffle. The more votes your pair got in round one, the more times your regular's name goes in. Whoever gets drawn judges round two, alongside Barrel Proof's own regular.</p>
+  </section>
+
+  <div class="divider"><span>Enter Your Pair</span></div>
+
+  <section class="submit-card">
+    <h2>Sign Up to Compete</h2>
+
+    <div class="thanks-banner" id="thanksBanner" hidden>
+      <div class="cheers">
+        <svg class="coupe coupe-left"><use href="#coupe"/></svg>
+        <svg class="sparkle"><use href="#spark"/></svg>
+        <svg class="coupe coupe-right"><use href="#coupe"/></svg>
+      </div>
+      <p class="thanks-title">You two are in!</p>
+      <p>Confirmations for the comp will be sent by email ASAP. After that, every pair gets their spec card, the rules, and the round two format a week ahead. Nobody walks in surprised.</p>
+    </div>
+
+    <div id="formArea">
+      <p class="submit-note">
+        One bartender, one regular. We close it at ten pairs, so get your regular on board and fill this out together. Confirmations for the comp will be sent by email ASAP.
+      </p>
+
+      <form class="submit-form" action="https://formspree.io/f/moeaveog" method="POST">
+        <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="The Regulars' Ball: New Pair Registration">
+        <input type="hidden" name="_next" value="https://ahli-switzler.github.io/DrinkingBuddiesWebsite/regulars-ball.html?sent=1">
+
+        <fieldset>
+          <legend>The Bartender</legend>
+
+          <div>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="Bartender Name" required>
+          </div>
+
+          <div>
+            <label for="bar">Bar You're Representing</label>
+            <input type="text" id="bar" name="Bar" required>
+          </div>
+
+          <div>
+            <label for="email">Email
+              <span class="hint">Your comp confirmation goes here.</span>
+            </label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="Bartender Phone" required>
+          </div>
+
+          <div>
+            <label for="instagram">Instagram Handle</label>
+            <input type="text" id="instagram" name="Bartender Instagram" required>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your Regular</legend>
+          <p class="legend-note">The nomination is the whole point. Tell us who they are, what they drink, and how long they've been coming in.</p>
+
+          <div>
+            <label for="regName">Regular's Name</label>
+            <input type="text" id="regName" name="Regular Name" required>
+          </div>
+
+          <div>
+            <label for="regDrink">Their Drink
+              <span class="hint">What do they order when they sit down?</span>
+            </label>
+            <input type="text" id="regDrink" name="Regular's Drink" required>
+          </div>
+
+          <div>
+            <label for="regHowLong">How Long They've Been Coming In</label>
+            <input type="text" id="regHowLong" name="How Long They've Been a Regular" required>
+          </div>
+
+          <div>
+            <label for="regWhy">Why This Person?
+              <span class="hint">One line is plenty.</span>
+            </label>
+            <textarea id="regWhy" name="Why This Regular" required></textarea>
+          </div>
+
+          <div>
+            <label for="regInstagram">Regular's Instagram
+              <span class="hint">Optional. So we can tag them when we announce.</span>
+            </label>
+            <input type="text" id="regInstagram" name="Regular Instagram">
+          </div>
+
+          <div class="checks">
+            <p>Check that your regular:</p>
+            <label class="check">
+              <input type="checkbox" name="Served 6+ Months" value="Yes" required>
+              Has been served by you regularly for at least six months.
+            </label>
+            <label class="check">
+              <input type="checkbox" name="Not a Bartender" value="Yes" required>
+              Does not work behind a bar for a living. Industry regulars are fine, as long as bartending isn't their main thing.
+            </label>
+            <label class="check">
+              <input type="checkbox" name="21+ and Full Night" value="Yes" required>
+              Is twenty one and up, and able to be in the room the full night.
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>The Rest</legend>
+
+          <div>
+            <label for="needs">Anything You Need From Us?
+              <span class="hint">Optional. Ask away.</span>
+            </label>
+            <textarea id="needs" name="Needs"></textarea>
+          </div>
+        </fieldset>
+
+        <p class="submit-note">
+          Every pair gets their spec card, the rules, and the round two format a week ahead. Confirmations for the comp will be sent by email ASAP.
+        </p>
+
+        <button type="submit">Count Us In</button>
+      </form>
+    </div>
+  </section>
+
+  <p class="footnote">
+    Questions? DM us on Instagram <a href="https://www.instagram.com/drinkingbuddieszine" target="_blank" rel="noopener">@DrinkingBuddiesZine</a>
+    or email <a href="mailto:drinkingbuddyzine@gmail.com">drinkingbuddyzine@gmail.com</a>.
+  </p>
+
+  <p class="presented-by">Presented by Bacard&iacute; &times; Drinking Buddies Zine</p>
+</div>
+
+<script>
+  if (new URLSearchParams(location.search).get('sent') === '1') {
+    document.getElementById('thanksBanner').hidden = false;
+    document.getElementById('formArea').hidden = true;
+  }
+</script>
