@@ -404,16 +404,22 @@
   </header>
 
   <section class="rules">
-    <p>Let's throw a regular party! The Regulars' Ball is a two round competition at Barrel Proof where a bartender competes alongside a regular they picked themselves as teammates.</p>
+    <p>Let's throw a regular party! The Regulars' Ball is a two round competition at Barrel Proof where a bartender competes alongside a regular they picked themselves as teammates. This is an event about the micro communities that bars cultivate, so we're bringing in ten bars from different neighborhoods around Nashville.</p>
+
+    <h3>The Spirit</h3>
+    <p>Five brands from the Bacardí portfolio, two bars per brand. Every bar gets randomly assigned a spirit, so nobody shows up to find six bars using the same bottle.</p>
 
     <h3>Round One</h3>
-    <p>An old fashioned, judged entirely by the standard of one person: the regular. Guests taste, guests vote, tokens in jars. The regular is the spec, the room is the jury. Top four pairs advance.</p>
+    <p>Bartender and regular create a drink with their assigned spirit that represents the bar from the regular's perspective. Both of them are behind the table: the bartender talks about the drink, the regular talks about the inspiration. Guests taste, guests vote. Top four pairs advance.</p>
 
-    <h3>Round Two</h3>
-    <p>The bartender puts their hands behind their back and does not touch a thing. The regular does all of it. Every pour, every stir, every garnish, run entirely on the bartender's voice.</p>
+    <h3>Round Two: Classics Face Off</h3>
+    <p>The bartender is blindfolded with their hands tied. They get 30 seconds to scan the well and see what they have and where things are. Then each pair gets assigned a classic cocktail, and the regular has 2 minutes to make it while the bartender walks them through it.</p>
 
     <h3>Round Two Judges</h3>
-    <p>The regulars who don't make it past round one get entered into a raffle. The more votes your pair got in round one, the more times your regular's name goes in. Whoever gets drawn judges round two, alongside Barrel Proof's own regular.</p>
+    <p>The regulars who don't make it past round one get entered into a raffle. The more votes your pair got in round one, the more times your regular's name goes in. Whoever gets drawn judges round two, alongside Barrel Proof's own regular. Drinks are scored on taste, time, and teamwork (how the bartender talks their regular through it).</p>
+
+    <h3>The Prize</h3>
+    <p>Engraved bottles of Angel's Envy for the winners.</p>
   </section>
 
   <div class="divider"><span>Enter Your Pair</span></div>
@@ -428,7 +434,7 @@
         <svg class="coupe coupe-right"><use href="#coupe"/></svg>
       </div>
       <p class="thanks-title">You two are in!</p>
-      <p>Confirmations for the comp will be sent by email ASAP. After that, every pair gets their spec card, the rules, and the round two format a week ahead. Nobody walks in surprised.</p>
+      <p>Confirmations for the comp will be sent by email ASAP, along with your assigned spirit. Nobody walks in surprised.</p>
     </div>
 
     <div id="formArea">
@@ -452,6 +458,13 @@
           <div>
             <label for="bar">Bar You're Representing</label>
             <input type="text" id="bar" name="Bar" required>
+          </div>
+
+          <div>
+            <label for="neighborhood">Neighborhood
+              <span class="hint">What part of town is your bar in?</span>
+            </label>
+            <input type="text" id="neighborhood" name="Neighborhood" required>
           </div>
 
           <div>
@@ -515,7 +528,7 @@
             </label>
             <label class="check">
               <input type="checkbox" name="Not a Bartender" value="Yes" required>
-              Does not work behind a bar for a living. Industry regulars are fine, as long as bartending isn't their main thing.
+              Does not work in the industry.
             </label>
             <label class="check">
               <input type="checkbox" name="21+ and Full Night" value="Yes" required>
@@ -536,7 +549,7 @@
         </fieldset>
 
         <p class="submit-note">
-          Every pair gets their spec card, the rules, and the round two format a week ahead. Confirmations for the comp will be sent by email ASAP.
+          Your spirit gets assigned randomly after you sign up. Confirmations for the comp, with your spirit, will be sent by email ASAP.
         </p>
 
         <button type="submit">Count Us In</button>
