@@ -172,6 +172,7 @@
     color: var(--ink-soft);
     margin-top: 0.1em;
   }
+  .submit-form select,
   .submit-form textarea,
   .submit-form input[type="text"],
   .submit-form input[type="tel"],
@@ -483,27 +484,31 @@
             <label for="instagram">Instagram Handle</label>
             <input type="text" id="instagram" name="Bartender Instagram" required>
           </div>
+
+          <div>
+            <label for="shirt">Your Shirt Size
+              <span class="hint">For the brand.</span>
+            </label>
+            <select id="shirt" name="Bartender Shirt Size" required>
+              <option value="" disabled selected>Pick a size</option>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+              <option>XXL</option>
+              <option>XXXL</option>
+            </select>
+          </div>
         </fieldset>
 
         <fieldset>
           <legend>Your Regular</legend>
-          <p class="legend-note">The nomination is the whole point. Tell us who they are, what they drink, and how long they've been coming in.</p>
+          <p class="legend-note">The nomination is the whole point. Tell us who they are and why them.</p>
 
           <div>
             <label for="regName">Regular's Name</label>
             <input type="text" id="regName" name="Regular Name" required>
-          </div>
-
-          <div>
-            <label for="regDrink">Their Drink
-              <span class="hint">What do they order when they sit down?</span>
-            </label>
-            <input type="text" id="regDrink" name="Regular's Drink" required>
-          </div>
-
-          <div>
-            <label for="regHowLong">How Long They've Been Coming In</label>
-            <input type="text" id="regHowLong" name="How Long They've Been a Regular" required>
           </div>
 
           <div>
@@ -520,6 +525,20 @@
             <input type="text" id="regInstagram" name="Regular Instagram">
           </div>
 
+          <div>
+            <label for="regShirt">Regular's Shirt Size</label>
+            <select id="regShirt" name="Regular Shirt Size" required>
+              <option value="" disabled selected>Pick a size</option>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+              <option>XXL</option>
+              <option>XXXL</option>
+            </select>
+          </div>
+
           <div class="checks">
             <p>Check that your regular:</p>
             <label class="check">
@@ -531,8 +550,8 @@
               Does not work in the industry, as long as bartending isn't their main job.
             </label>
             <label class="check">
-              <input type="checkbox" name="21+ and Full Night" value="Yes" required>
-              Is twenty one and up, and able to be in the room the full night.
+              <input type="checkbox" name="21+" value="Yes" required>
+              Is twenty one and up.
             </label>
           </div>
         </fieldset>
